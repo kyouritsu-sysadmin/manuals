@@ -1,0 +1,184 @@
+{
+  "divisions": [
+    {
+      "slug": "sales",
+      "name": "Sales",
+      "description": "Training, reference material, and resources for the sales team."
+    },
+    {
+      "slug": "division-02",
+      "name": "Division 02",
+      "description": "Ready for your division’s manuals and documents.",
+      "placeholder": true
+    },
+    {
+      "slug": "division-03",
+      "name": "Division 03",
+      "description": "Ready for your division’s manuals and documents.",
+      "placeholder": true
+    },
+    {
+      "slug": "division-04",
+      "name": "Division 04",
+      "description": "Ready for your division’s manuals and documents.",
+      "placeholder": true
+    },
+    {
+      "slug": "division-05",
+      "name": "Division 05",
+      "description": "Ready for your division’s manuals and documents.",
+      "placeholder": true
+    },
+    {
+      "slug": "division-06",
+      "name": "Division 06",
+      "description": "Ready for your division’s manuals and documents.",
+      "placeholder": true
+    },
+    {
+      "slug": "division-07",
+      "name": "Division 07",
+      "description": "Ready for your division’s manuals and documents.",
+      "placeholder": true
+    },
+    {
+      "slug": "division-08",
+      "name": "Division 08",
+      "description": "Ready for your division’s manuals and documents.",
+      "placeholder": true
+    },
+    {
+      "slug": "division-09",
+      "name": "Division 09",
+      "description": "Ready for your division’s manuals and documents.",
+      "placeholder": true
+    },
+    {
+      "slug": "division-10",
+      "name": "Division 10",
+      "description": "Ready for your division’s manuals and documents.",
+      "placeholder": true
+    },
+    {
+      "slug": "division-11",
+      "name": "Division 11",
+      "description": "Ready for your division’s manuals and documents.",
+      "placeholder": true
+    },
+    {
+      "slug": "division-12",
+      "name": "Division 12",
+      "description": "Ready for your division’s manuals and documents.",
+      "placeholder": true
+    },
+    {
+      "slug": "division-13",
+      "name": "Division 13",
+      "description": "Ready for your division’s manuals and documents.",
+      "placeholder": true
+    },
+    {
+      "slug": "division-14",
+      "name": "Division 14",
+      "description": "Ready for your division’s manuals and documents.",
+      "placeholder": true
+    },
+    {
+      "slug": "division-15",
+      "name": "Division 15",
+      "description": "Ready for your division’s manuals and documents.",
+      "placeholder": true
+    },
+    {
+      "slug": "division-16",
+      "name": "Division 16",
+      "description": "Ready for your division’s manuals and documents.",
+      "placeholder": true
+    },
+    {
+      "slug": "division-17",
+      "name": "Division 17",
+      "description": "Ready for your division’s manuals and documents.",
+      "placeholder": true
+    },
+    {
+      "slug": "division-18",
+      "name": "Division 18",
+      "description": "Ready for your division’s manuals and documents.",
+      "placeholder": true
+    },
+    {
+      "slug": "division-19",
+      "name": "Division 19",
+      "description": "Ready for your division’s manuals and documents.",
+      "placeholder": true
+    },
+    {
+      "slug": "division-20",
+      "name": "Division 20",
+      "description": "Ready for your division’s manuals and documents.",
+      "placeholder": true
+    },
+    {
+      "slug": "division-21",
+      "name": "Division 21",
+      "description": "Ready for your division’s manuals and documents.",
+      "placeholder": true
+    },
+    {
+      "slug": "division-22",
+      "name": "Division 22",
+      "description": "Ready for your division’s manuals and documents.",
+      "placeholder": true
+    },
+    {
+      "slug": "division-23",
+      "name": "Division 23",
+      "description": "Ready for your division’s manuals and documents.",
+      "placeholder": true
+    }
+  ],
+  "categories": [
+    {
+      "slug": "manual",
+      "name": "Manuals"
+    },
+    {
+      "slug": "guides",
+      "name": "Guides"
+    },
+    {
+      "slug": "policies",
+      "name": "Policies"
+    },
+    {
+      "slug": "forms",
+      "name": "Forms"
+    }
+  ],
+  "documents": [
+    {
+      "slug": "sales-training",
+      "division": "sales",
+      "category": "manual",
+      "title": "Sales training manual",
+      "description": "営業講習マニュアル · Japanese sales training reference.",
+      "format": "PDF",
+      "language": "日本語",
+      "updated": "2026-10-13",
+      "file": "files/sales/sales-training-ja.pdf"
+    },
+    {
+      "slug": "getting-started",
+      "division": "sales",
+      "category": "guides",
+      "title": "Using the document library",
+      "description": "A sample guide to finding, reading, and sharing team documents.",
+      "format": "Guide",
+      "language": "English",
+      "updated": "2026-10-15",
+      "source": "content/sales/guides/getting-started.md",
+      "sample": true
+    }
+  ]
+}
