@@ -1,0 +1,66 @@
+{
+  "siteUrl": "https://kyouritsu-sysadmin.github.io",
+  "name": "KYORITSU",
+  "cards": [
+    {
+      "id": "manuals",
+      "icon": "book",
+      "title": {
+        "en": "Manuals",
+        "ja": "マニュアル"
+      },
+      "description": {
+        "en": "The knowledge behind our work. Explore manuals, guides, and documents from every division.",
+        "ja": "仕事を支える知識をひとつに。各部門のマニュアル、ガイド、資料を探せます。"
+      },
+      "button": {
+        "en": "Open manuals",
+        "ja": "マニュアルを開く"
+      },
+      "href": {
+        "en": "/manuals/",
+        "ja": "/manuals/ja/"
+      },
+      "status": "available"
+    },
+    {
+      "id": "training",
+      "icon": "training",
+      "title": {
+        "en": "Training Guide",
+        "ja": "研修ガイド"
+      },
+      "description": {
+        "en": "A place to learn, develop your skills, and find guidance for your role.",
+        "ja": "業務の理解を深め、スキルを身につけるための研修資料をまとめます。"
+      },
+      "status": "planned"
+    },
+    {
+      "id": "company-map",
+      "icon": "map",
+      "title": {
+        "en": "Company Map",
+        "ja": "会社マップ"
+      },
+      "description": {
+        "en": "Find your way around company locations, offices, and facilities.",
+        "ja": "会社の拠点、オフィス、施設の場所を確認するためのスペースです。"
+      },
+      "status": "planned"
+    },
+    {
+      "id": "official-documents",
+      "icon": "file",
+      "title": {
+        "en": "Company Official Documents",
+        "ja": "社内公式文書"
+      },
+      "description": {
+        "en": "A central place for official company documents and reference materials.",
+        "ja": "会社の公式文書や参照資料を、ひとつの場所にまとめます。"
+      },
+      "status": "planned"
+    }
+  ]
+}

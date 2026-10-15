@@ -11,6 +11,7 @@ const japanese = JSON.parse(
 );
 const output = process.env.BUILD_DIR || path.join(root, "build");
 const base = process.env.BASE_URL || "/manuals/";
+const homeUrl = process.env.HOME_URL || "https://kyouritsu-sysadmin.github.io/";
 let checks = 0;
 const escaped = (text) =>
   text
@@ -41,6 +42,10 @@ for (const locale of ["en", "ja"]) {
     assert(
       html.includes(`${localeBase}assets/`),
       `Incorrect asset prefix: ${locale}/${route}`,
+    );
+    assert(
+      html.includes(`href="${homeUrl}"`),
+      `Missing root Home link: ${locale}/${route}`,
     );
     checks++;
     return html;

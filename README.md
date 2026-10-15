@@ -107,3 +107,13 @@ English remains at `/manuals/`; Japanese is built at `/manuals/ja/`. The languag
 The browser downloads PDF.js and its worker, fonts, CMaps, and WASM from this site; no Google Drive integration or external viewer/CDN is used. The generator copies matching runtime files from the pinned PDF.js package. Node.js 24 is required. Nearby pages are rendered into bounded bitmaps and old bitmaps are released; thumbnails render when their panel scrolls into view. Standard PDF mode remains available for selectable text, PDF search, browser printing, and preview failures.
 
 `page-flip@2.0.7` does not stop its animation loop when destroyed. The generator applies a small, checked lifecycle fix to a generated copy and preserves its license. Recheck that patch when upgrading the package. Never edit generated assets directly.
+
+## Company home page
+
+A separate, minimal company home page is in [`portal/`](portal/README.md). It has four cards: **Manuals**, **Training Guide**, **Company Map**, and **Company Official Documents**. Manuals opens `/manuals/` (or `/manuals/ja/` from the Japanese home page). The remaining cards are marked as coming soon until their destinations are configured.
+
+The manuals' **Home** link and KYORITSU logo now return to `https://kyouritsu-sysadmin.github.io/`. `HOME_URL` can override this destination for a local preview or another domain.
+
+The root home page must be published from `kyouritsu-sysadmin/kyouritsu-sysadmin.github.io`; deploying the existing `manuals` repository cannot populate the root address. The portal directory includes a standalone build, a manual Pages workflow, and [deployment instructions](portal/README.md). Existing manuals and Japanese document URLs remain unchanged.
+
+Build only the home site with `npm run build:portal` from `my-docs/`. To preview Home → Manuals → Home locally, run `npm run build:preview` and serve `portal/.preview/` as described in the portal guide.

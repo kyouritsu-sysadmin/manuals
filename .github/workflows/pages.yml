@@ -4,6 +4,7 @@ on:
   pull_request:
     paths:
       - "my-docs/**"
+      - "portal/**"
       - ".github/workflows/pages.yml"
   workflow_dispatch:
 
@@ -31,6 +32,8 @@ jobs:
         run: npm ci
       - name: Check types and catalog
         run: npm run typecheck
+      - name: Build and check company home
+        run: npm run build:portal && node ../portal/scripts/check.mjs
       - name: Build static site
         run: npm run build
       - name: Check routes and attachments

@@ -1,6 +1,8 @@
 import type { Config } from "@docusaurus/types";
 import type * as Preset from "@docusaurus/preset-classic";
 
+const homeUrl = process.env.HOME_URL || "https://kyouritsu-sysadmin.github.io/";
+
 const config: Config = {
   title: "Kyoritsu Library",
   tagline: "Your company knowledge, in one place.",
@@ -8,6 +10,7 @@ const config: Config = {
   url: process.env.SITE_URL || "https://kyouritsu-sysadmin.github.io",
   baseUrl: process.env.BASE_URL || "/manuals/",
   trailingSlash: true,
+  customFields: { homeUrl },
   organizationName: "kyouritsu-sysadmin",
   projectName: "manuals",
   deploymentBranch: "gh-pages",
@@ -41,8 +44,9 @@ const config: Config = {
     colorMode: { defaultMode: "light", disableSwitch: true },
     navbar: {
       title: "KYORITSU",
-      logo: { alt: "", src: "img/library.svg" },
+      logo: { alt: "", src: "img/library.svg", href: homeUrl, target: "_self" },
       items: [
+        { href: homeUrl, label: "Home", position: "left", target: "_self" },
         { type: "localeDropdown", position: "right" },
         {
           to: "/",

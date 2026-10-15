@@ -17,7 +17,9 @@
     "prestart": "npm run generate",
     "prebuild": "npm run generate",
     "pretypecheck": "npm run generate",
-    "check:build": "node scripts/check-build.mjs"
+    "check:build": "node scripts/check-build.mjs",
+    "build:portal": "node ../portal/scripts/build.mjs",
+    "build:preview": "node ../portal/scripts/preview.mjs"
   },
   "dependencies": {
     "@docusaurus/core": "3.10.2",
