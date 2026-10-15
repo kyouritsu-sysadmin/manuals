@@ -19,8 +19,8 @@ The local library is at `http://localhost:3000/manuals/`. The homepage includes 
 The existing Git remote is `kyouritsu-sysadmin/manuals`; its GitHub Pages prefix is `/manuals/`:
 
 - `/manuals/` — all divisions and documents
-- `/manuals/sales/` — Sales overview
-- `/manuals/sales/manual/` — Sales manuals
+- `/manuals/sales/` — Head Office Sales overview
+- `/manuals/sales/manual/` — Head Office Sales manuals
 - `/manuals/sales/manual/sales-training/` — existing Japanese PDF
 - `/manuals/sales/guides/getting-started/` — sample web document
 
@@ -28,7 +28,11 @@ Each division has its own Manuals, Guides, Policies, and Forms pages, including 
 
 ## Add or rename divisions
 
-Edit `my-docs/src/data/catalog.json`. There are 23 spaces: Sales and 22 explicit placeholders. Replace placeholder names, descriptions, and slugs with your actual divisions, and remove `"placeholder": true`. Slugs use lowercase letters, numbers, and hyphens. Update document division references when changing a slug. Treat published slugs as permanent so shared links keep working. More divisions can be added without changing React components.
+Edit `my-docs/src/data/catalog.json`. The company directory contains 25 entries: 13 top-level departments, groups, and branches and 12 child sections. Each entry has an English `name`, `japanese` name, and `romaji`; sections reference their department using `parent`. Japanese display text lives in `src/data/locales/ja.json`. The generator validates parent references, cycles, and Japanese names and refreshes document sidebar translations.
+
+The navigation and department cards show the hierarchy. Department libraries include documents from their sections; each section also has its own library. Search accepts English, Japanese, and romaji, with or without macrons. For example, `/manuals/design/` contains links to `/manuals/electrical-design/` and `/manuals/structural-design/`.
+
+Head Office Sales (本社営業) retains the `sales` slug and all existing document URLs. New entries use descriptive, lowercase slugs. Treat published slugs as permanent so shared links keep working; document records use the owning department or section slug. Empty placeholder URLs (`division-02` through `division-23`) have been replaced by the named libraries.
 
 ## Add a PDF
 

@@ -1,5 +1,6 @@
 import type { SidebarsConfig } from "@docusaurus/plugin-content-docs";
 import catalog from "./src/data/library";
+import { divisionTrail } from "./src/data/hierarchy";
 const sidebars: SidebarsConfig = {};
 for (const division of catalog.divisions) {
   const documents = catalog.documents.filter(
@@ -8,12 +9,12 @@ for (const division of catalog.divisions) {
   if (!documents.length) continue;
   sidebars[division.slug] = [
     { type: "link", label: "← All divisions", href: "/", autoAddBaseUrl: true },
-    {
-      type: "link",
-      label: `${division.name} overview`,
-      href: `/${division.slug}/`,
+    ...divisionTrail(catalog.divisions, division.slug).map((item) => ({
+      type: "link" as const,
+      label: `${item.name} overview`,
+      href: `/${item.slug}/`,
       autoAddBaseUrl: true,
-    },
+    })),
     ...catalog.categories
       .filter((category) =>
         documents.some((doc) => doc.category === category.slug),

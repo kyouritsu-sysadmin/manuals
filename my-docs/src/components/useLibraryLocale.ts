@@ -27,6 +27,7 @@ export default function useLibraryLocale() {
       divisions: source.divisions.map((item) => ({
         ...item,
         ...divisions[item.slug],
+        englishName: item.name,
       })),
       categories: source.categories.map((item) => ({
         ...item,

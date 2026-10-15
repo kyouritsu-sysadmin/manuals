@@ -65,7 +65,37 @@ for (const locale of ["en", "ja"]) {
       locale === "ja"
         ? japanese.divisions[division.slug]?.name || division.name
         : division.name;
-    page(division.slug, name);
+    const divisionPage = page(division.slug, name);
+    assert(
+      home.includes(escaped(name)),
+      `Division missing from home navigation: ${name}`,
+    );
+    assert(
+      divisionPage.includes(escaped(division.romaji)),
+      `Missing romaji: ${division.slug}`,
+    );
+    if (division.parent) {
+      const breadcrumb =
+        divisionPage.match(
+          /<nav class="library-breadcrumb"[\s\S]*?<\/nav>/,
+        )?.[0] || "";
+      assert(
+        breadcrumb.includes(`href="${localeBase}${division.parent}/"`),
+        `Missing parent breadcrumb: ${division.slug}`,
+      );
+    }
+    for (const child of catalog.divisions.filter(
+      (item) => item.parent === division.slug,
+    )) {
+      const sections =
+        divisionPage.match(
+          /<section class="divisions-section"[\s\S]*?<\/section>/,
+        )?.[0] || "";
+      assert(
+        sections.includes(`href="${localeBase}${child.slug}/"`),
+        `Missing child section: ${division.slug}/${child.slug}`,
+      );
+    }
     for (const category of catalog.categories)
       page(
         `${division.slug}/${category.slug}`,

@@ -3,8 +3,11 @@ import data from "./catalog.json";
 export interface Division {
   slug: string;
   name: string;
+  englishName?: string;
   description: string;
-  placeholder?: boolean;
+  japanese: string;
+  romaji: string;
+  parent?: string;
 }
 
 export interface LibraryDocument {

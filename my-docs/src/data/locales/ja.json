@@ -37,7 +37,6 @@
     "Clear filters": "絞り込みを解除",
     "Browse divisions": "部門から探す",
     "Find your team’s space": "チームの資料を見つける",
-    "Division name to be configured": "部門名は未設定です",
     "No documents yet": "資料はまだありません",
     "No divisions match your search.": "該当する部門がありません。",
     "Organized by division. Built for everyday reference.": "部門別に整理。日々の業務で使えるライブラリ。",
@@ -65,100 +64,112 @@
     "If the preview is unavailable on your device, use Open file or Download above.": "プレビューを表示できない場合は、上の「ファイルを開く」または「ダウンロード」をご利用ください。",
     "Loading page…": "ページを読み込み中…",
     "Guide": "ガイド",
-    "File": "ファイル"
+    "File": "ファイル",
+    "departments and sections": "部門・課",
+    "Sections": "課",
+    "Department": "所属部門",
+    "Includes section documents": "所属する課の資料を含みます"
   },
   "divisions": {
     "sales": {
-      "name": "営業部",
-      "description": "営業チームのための研修資料、マニュアル、参考資料。"
+      "name": "本社営業",
+      "description": "本社営業のマニュアル、ガイド、資料。"
     },
-    "division-02": {
-      "name": "部門 02",
-      "description": "部門のマニュアルや資料を登録できます。"
+    "design": {
+      "name": "設計部",
+      "description": "設計部のマニュアル、ガイド、資料。"
     },
-    "division-03": {
-      "name": "部門 03",
-      "description": "部門のマニュアルや資料を登録できます。"
+    "electrical-design": {
+      "name": "電気設計課",
+      "description": "電気設計課のマニュアル、ガイド、資料。"
     },
-    "division-04": {
-      "name": "部門 04",
-      "description": "部門のマニュアルや資料を登録できます。"
+    "structural-design": {
+      "name": "構造設計課",
+      "description": "構造設計課のマニュアル、ガイド、資料。"
     },
-    "division-05": {
-      "name": "部門 05",
-      "description": "部門のマニュアルや資料を登録できます。"
+    "production-management": {
+      "name": "生産管理部",
+      "description": "生産管理部のマニュアル、ガイド、資料。"
     },
-    "division-06": {
-      "name": "部門 06",
-      "description": "部門のマニュアルや資料を登録できます。"
+    "production-scheduling": {
+      "name": "工程課",
+      "description": "工程課のマニュアル、ガイド、資料。"
     },
-    "division-07": {
-      "name": "部門 07",
-      "description": "部門のマニュアルや資料を登録できます。"
+    "materials": {
+      "name": "資材課",
+      "description": "資材課のマニュアル、ガイド、資料。"
     },
-    "division-08": {
-      "name": "部門 08",
-      "description": "部門のマニュアルや資料を登録できます。"
+    "general-affairs": {
+      "name": "総務部",
+      "description": "総務部のマニュアル、ガイド、資料。"
     },
-    "division-09": {
-      "name": "部門 09",
-      "description": "部門のマニュアルや資料を登録できます。"
+    "ai-iot": {
+      "name": "AI/IOTグループ",
+      "description": "AI/IOTグループのマニュアル、ガイド、資料。"
     },
-    "division-10": {
-      "name": "部門 10",
-      "description": "部門のマニュアルや資料を登録できます。"
+    "manufacturing": {
+      "name": "製造部",
+      "description": "製造部のマニュアル、ガイド、資料。"
     },
-    "division-11": {
-      "name": "部門 11",
-      "description": "部門のマニュアルや資料を登録できます。"
+    "processing": {
+      "name": "加工課",
+      "description": "加工課のマニュアル、ガイド、資料。"
     },
-    "division-12": {
-      "name": "部門 12",
-      "description": "部門のマニュアルや資料を登録できます。"
+    "frame": {
+      "name": "フレーム課",
+      "description": "フレーム課のマニュアル、ガイド、資料。"
     },
-    "division-13": {
-      "name": "部門 13",
-      "description": "部門のマニュアルや資料を登録できます。"
+    "thin-sheet-metal-1": {
+      "name": "薄物1課",
+      "description": "薄物1課のマニュアル、ガイド、資料。"
     },
-    "division-14": {
-      "name": "部門 14",
-      "description": "部門のマニュアルや資料を登録できます。"
+    "painting": {
+      "name": "塗装課",
+      "description": "塗装課のマニュアル、ガイド、資料。"
     },
-    "division-15": {
-      "name": "部門 15",
-      "description": "部門のマニュアルや資料を登録できます。"
+    "wiring": {
+      "name": "配線部",
+      "description": "配線部のマニュアル、ガイド、資料。"
     },
-    "division-16": {
-      "name": "部門 16",
-      "description": "部門のマニュアルや資料を登録できます。"
+    "wiring-a1": {
+      "name": "A-1課",
+      "description": "A-1課のマニュアル、ガイド、資料。"
     },
-    "division-17": {
-      "name": "部門 17",
-      "description": "部門のマニュアルや資料を登録できます。"
+    "wiring-a2-a3": {
+      "name": "A-2課（A-3課）",
+      "description": "A-2課（A-3課）のマニュアル、ガイド、資料。"
     },
-    "division-18": {
-      "name": "部門 18",
-      "description": "部門のマニュアルや資料を登録できます。"
+    "wiring-b1-b2": {
+      "name": "B-1課（B-2課）",
+      "description": "B-1課（B-2課）のマニュアル、ガイド、資料。"
     },
-    "division-19": {
-      "name": "部門 19",
-      "description": "部門のマニュアルや資料を登録できます。"
+    "wiring-b3": {
+      "name": "B-3課",
+      "description": "B-3課のマニュアル、ガイド、資料。"
     },
-    "division-20": {
-      "name": "部門 20",
-      "description": "部門のマニュアルや資料を登録できます。"
+    "inspection": {
+      "name": "検査部",
+      "description": "検査部のマニュアル、ガイド、資料。"
     },
-    "division-21": {
-      "name": "部門 21",
-      "description": "部門のマニュアルや資料を登録できます。"
+    "quality-environment": {
+      "name": "品質環境管理部",
+      "description": "品質環境管理部のマニュアル、ガイド、資料。"
     },
-    "division-22": {
-      "name": "部門 22",
-      "description": "部門のマニュアルや資料を登録できます。"
+    "engineering": {
+      "name": "エンジニアリング部",
+      "description": "エンジニアリング部のマニュアル、ガイド、資料。"
     },
-    "division-23": {
-      "name": "部門 23",
-      "description": "部門のマニュアルや資料を登録できます。"
+    "tokyo": {
+      "name": "東京支店",
+      "description": "東京支店のマニュアル、ガイド、資料。"
+    },
+    "osaka": {
+      "name": "大阪支店",
+      "description": "大阪支店のマニュアル、ガイド、資料。"
+    },
+    "fukuoka": {
+      "name": "福岡支店",
+      "description": "福岡支店のマニュアル、ガイド、資料。"
     }
   },
   "categories": {

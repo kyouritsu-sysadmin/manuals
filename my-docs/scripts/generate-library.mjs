@@ -24,6 +24,24 @@ for (const [kind, entries] of [
     ids.add(entry.slug);
   }
 }
+for (const division of catalog.divisions) {
+  assert(
+    division.japanese && division.romaji,
+    `Missing division names: ${division.slug}`,
+  );
+  const ancestors = new Set([division.slug]);
+  let parent = division.parent;
+  while (parent) {
+    const entry = catalog.divisions.find((item) => item.slug === parent);
+    assert(entry, `Unknown parent division: ${parent}`);
+    assert(
+      !ancestors.has(parent),
+      `Circular division hierarchy: ${division.slug}`,
+    );
+    ancestors.add(parent);
+    parent = entry.parent;
+  }
+}
 function inputFile(relative, folder) {
   assert(typeof relative === "string", "A file path is required");
   const base = path.join(root, folder);
@@ -36,6 +54,35 @@ function inputFile(relative, folder) {
 }
 const japanese = JSON.parse(
   fs.readFileSync(path.join(root, "src/data/locales/ja.json"), "utf8"),
+);
+// Keep document sidebar labels aligned with renamed departments and ancestors.
+const sidebarTranslations = {};
+for (const division of catalog.divisions) {
+  assert(
+    japanese.divisions[division.slug]?.name === division.japanese,
+    `Japanese division name mismatch: ${division.slug}`,
+  );
+  sidebarTranslations[`sidebar.${division.slug}.link.← All divisions`] = {
+    message: "← すべての部門",
+  };
+  let ancestor = division;
+  while (ancestor) {
+    sidebarTranslations[
+      `sidebar.${division.slug}.link.${ancestor.name} overview`
+    ] = {
+      message: `${japanese.divisions[ancestor.slug].name}の資料`,
+    };
+    ancestor = catalog.divisions.find((item) => item.slug === ancestor.parent);
+  }
+  for (const category of catalog.categories)
+    sidebarTranslations[`sidebar.${division.slug}.category.${category.name}`] =
+      {
+        message: japanese.categories[category.slug]?.name || category.name,
+      };
+}
+fs.writeFileSync(
+  path.join(root, "i18n/ja/docusaurus-plugin-content-docs/current.json"),
+  JSON.stringify(sidebarTranslations, null, 2) + "\n",
 );
 const pages = [];
 const japanesePages = [];

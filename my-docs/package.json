@@ -17,7 +17,7 @@
     "prestart": "npm run generate",
     "prebuild": "npm run generate",
     "pretypecheck": "npm run generate",
-    "check:build": "node scripts/check-build.mjs",
+    "check:build": "node --test scripts/hierarchy.test.mjs && node scripts/check-build.mjs",
     "build:portal": "node ../portal/scripts/build.mjs",
     "build:preview": "node ../portal/scripts/preview.mjs"
   },

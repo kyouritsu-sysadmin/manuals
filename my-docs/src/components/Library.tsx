@@ -3,6 +3,13 @@ import Link from "@docusaurus/Link";
 import Layout from "@theme/Layout";
 import Heading from "@theme/Heading";
 import useLibraryLocale from "./useLibraryLocale";
+import type { Division } from "../data/library";
+import {
+  divisionTrail,
+  withinDivision,
+  normalizeSearch,
+  divisionMatches,
+} from "../data/hierarchy";
 
 type Props = { division?: string; category?: string | null };
 export default function Library({ division, category }: Props) {
@@ -15,32 +22,68 @@ export default function Library({ division, category }: Props) {
   const currentCategory = catalog.categories.find(
     (item) => item.slug === category,
   );
+  const trail = divisionTrail(catalog.divisions, division);
+  const childrenOf = (slug?: string) =>
+    catalog.divisions.filter((item) => item.parent === slug);
+  const countDocuments = (slug: string) =>
+    catalog.documents.filter((doc) =>
+      withinDivision(catalog.divisions, doc.division, slug),
+    ).length;
   const scoped = catalog.documents.filter(
     (doc) =>
-      (!division || doc.division === division) &&
+      withinDivision(catalog.divisions, doc.division, division) &&
       (!category || doc.category === category),
   );
-  const search = query.trim().toLocaleLowerCase();
+  const search = normalizeSearch(query.trim());
   const documents = scoped.filter(
     (doc) =>
       (format === "all" || doc.format === format) &&
-      [
-        doc.title,
-        doc.description,
-        doc.language,
-        catalog.divisions.find((item) => item.slug === doc.division)?.name,
-        doc.category,
-      ]
-        .join(" ")
-        .toLocaleLowerCase()
-        .includes(search),
+      normalizeSearch(
+        [
+          doc.title,
+          doc.description,
+          doc.language,
+          ...divisionTrail(catalog.divisions, doc.division).flatMap((item) => [
+            item.name,
+            item.englishName || "",
+            item.japanese,
+            item.romaji,
+          ]),
+          doc.category,
+        ].join(" "),
+      ).includes(search),
   );
-  const divisions = catalog.divisions.filter((item) =>
-    [item.name, item.description]
-      .join(" ")
-      .toLocaleLowerCase()
-      .includes(search),
-  );
+  const matchesBranch = (item: Division): boolean =>
+    divisionMatches(item, search) || childrenOf(item.slug).some(matchesBranch);
+  const divisions = childrenOf(division).filter(matchesBranch);
+  function divisionLinks(items: Division[], filtered = false) {
+    return (
+      <ul className="division-tree">
+        {items
+          .filter((item) => !filtered || matchesBranch(item))
+          .map((item) => (
+            <li key={item.slug}>
+              <Link
+                className={`side-link ${division === item.slug ? "selected" : ""}`}
+                to={`/${item.slug}/`}
+                aria-current={division === item.slug ? "page" : undefined}
+              >
+                <span className="division-dot" aria-hidden="true" />
+                <span>{item.name}</span>
+                {countDocuments(item.slug) > 0 && (
+                  <span className="live-dot" aria-hidden="true" />
+                )}
+              </Link>
+              {childrenOf(item.slug).length > 0 &&
+                divisionLinks(
+                  childrenOf(item.slug),
+                  filtered && !divisionMatches(item, search),
+                )}
+            </li>
+          ))}
+      </ul>
+    );
+  }
   const title = currentCategory
     ? currentCategory.name
     : currentDivision
@@ -67,22 +110,7 @@ export default function Library({ division, category }: Props) {
           <div className="sidebar-label division-label">
             {t("DIVISIONS")} <span>{catalog.divisions.length}</span>
           </div>
-          <nav>
-            {catalog.divisions.map((item) => (
-              <Link
-                key={item.slug}
-                className={`side-link ${division === item.slug ? "selected" : ""}`}
-                to={`/${item.slug}/`}
-                aria-current={division === item.slug ? "page" : undefined}
-              >
-                <span className="division-dot" />
-                {item.name}
-                {catalog.documents.some(
-                  (doc) => doc.division === item.slug,
-                ) && <span className="live-dot" />}
-              </Link>
-            ))}
-          </nav>
+          <nav>{divisionLinks(childrenOf())}</nav>
           <div className="sidebar-note">
             {t("One library.")}
             <br />
@@ -92,12 +120,12 @@ export default function Library({ division, category }: Props) {
         <main className="library-main" id="library-content">
           <nav className="library-breadcrumb" aria-label={t("Breadcrumb")}>
             <Link to="/">{t("Library")}</Link>
-            {currentDivision && (
-              <>
+            {trail.map((item) => (
+              <React.Fragment key={item.slug}>
                 <span>/</span>
-                <Link to={`/${division}/`}>{currentDivision.name}</Link>
-              </>
-            )}
+                <Link to={`/${item.slug}/`}>{item.name}</Link>
+              </React.Fragment>
+            ))}
             {currentCategory && (
               <>
                 <span>/</span>
@@ -112,6 +140,11 @@ export default function Library({ division, category }: Props) {
                 : t("THE KNOWLEDGE LIBRARY")}
             </div>
             <h1>{title}</h1>
+            {currentDivision && (
+              <p className="division-romaji" lang="en">
+                {currentDivision.romaji}
+              </p>
+            )}
             <p>
               {currentDivision
                 ? currentDivision.description
@@ -122,7 +155,8 @@ export default function Library({ division, category }: Props) {
             {!division && (
               <div className="library-stats">
                 <span>
-                  <strong>{catalog.divisions.length}</strong> {t("divisions")}
+                  <strong>{catalog.divisions.length}</strong>{" "}
+                  {t("departments and sections")}
                 </span>
                 <span>
                   <strong>{catalog.documents.length}</strong> {t("documents")}
@@ -216,7 +250,11 @@ export default function Library({ division, category }: Props) {
                 <span>{documents.length}</span>
               </h2>
               <span className="section-caption">
-                {division ? currentDivision?.name : t("Across your workspace")}
+                {division
+                  ? childrenOf(division).length
+                    ? t("Includes section documents")
+                    : currentDivision?.name
+                  : t("Across your workspace")}
               </span>
             </div>
             <div className="document-list" aria-live="polite">
@@ -307,11 +345,12 @@ export default function Library({ division, category }: Props) {
               )}
             </div>
           </section>
-          {!division && (
+          {(!division || childrenOf(division).length > 0) && (
             <section className="divisions-section" aria-labelledby="divisions">
               <div className="section-title">
                 <Heading as="h2" id="divisions">
-                  {t("Browse divisions")} <span>{divisions.length}</span>
+                  {t(division ? "Sections" : "Browse divisions")}{" "}
+                  <span>{divisions.length}</span>
                 </Heading>
                 <span className="section-caption">
                   {t("Find your team’s space")}
@@ -319,33 +358,38 @@ export default function Library({ division, category }: Props) {
               </div>
               <div className="division-grid">
                 {divisions.map((item) => {
-                  const count = catalog.documents.filter(
-                    (doc) => doc.division === item.slug,
-                  ).length;
+                  const count = countDocuments(item.slug);
                   return (
-                    <Link
-                      className="division-card"
-                      key={item.slug}
-                      to={`/${item.slug}/`}
-                    >
-                      <div className="division-card-top">
-                        <span className="division-monogram">
-                          {item.slug === "sales" ? "SA" : item.slug.slice(-2)}
+                    <article className="division-card" key={item.slug}>
+                      <Link
+                        className="division-card-link"
+                        to={`/${item.slug}/`}
+                      >
+                        <div className="division-card-top">
+                          <span className="division-monogram">
+                            {item.slug === "sales"
+                              ? "SA"
+                              : item.slug.slice(0, 2).toUpperCase()}
+                          </span>
+                          <span aria-hidden="true">↗</span>
+                        </div>
+                        <h3>{item.name}</h3>
+                        <span className="division-romaji" lang="en">
+                          {item.romaji}
                         </span>
-                        <span aria-hidden="true">↗</span>
-                      </div>
-                      <h3>{item.name}</h3>
-                      <p>
-                        {item.placeholder
-                          ? t("Division name to be configured")
-                          : item.description}
-                      </p>
+                        <p>{item.description}</p>
+                      </Link>
+                      {childrenOf(item.slug).length > 0 &&
+                        divisionLinks(
+                          childrenOf(item.slug),
+                          !divisionMatches(item, search),
+                        )}
                       <span className="division-card-count">
                         {count
                           ? `${count} ${t("documents")}`
                           : t("No documents yet")}
                       </span>
-                    </Link>
+                    </article>
                   );
                 })}
               </div>

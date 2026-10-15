@@ -106,12 +106,14 @@ body {
   font-size: 11px;
 }
 .division-dot {
+  flex-shrink: 0;
   width: 6px;
   height: 6px;
   border: 1px solid #a5aea7;
   border-radius: 2px;
 }
 .live-dot {
+  flex-shrink: 0;
   width: 5px;
   height: 5px;
   background: #4e7c5e;
@@ -125,6 +127,59 @@ body {
   font-size: 11px;
   line-height: 1.9;
   color: #879188;
+}
+.division-tree {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.division-tree li {
+  margin: 0;
+}
+.division-tree .division-tree {
+  margin-left: 15px;
+  padding-left: 8px;
+  border-left: 1px solid var(--border);
+}
+.division-tree .side-link {
+  align-items: flex-start;
+  gap: 8px;
+}
+.division-tree .division-dot,
+.division-tree .live-dot {
+  margin-top: 6px;
+}
+.division-tree .side-link > span:nth-child(2) {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.division-romaji {
+  display: block;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 400;
+  margin-bottom: 12px;
+}
+.library-hero .division-romaji {
+  font-size: 13px;
+  margin-top: -12px;
+}
+.division-card-link {
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.division-card-link:hover {
+  color: #245d49;
+  text-decoration: none;
+}
+.division-card > .division-tree {
+  margin-bottom: 16px;
+}
+.division-card .side-link {
+  font-size: 11px;
+  padding: 7px 0;
 }
 .library-main {
   max-width: 1320px;

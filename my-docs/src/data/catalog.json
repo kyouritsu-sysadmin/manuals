@@ -2,140 +2,190 @@
   "divisions": [
     {
       "slug": "sales",
-      "name": "Sales",
-      "description": "Training, reference material, and resources for the sales team."
+      "name": "Head Office Sales",
+      "japanese": "本社営業",
+      "romaji": "Honsha Eigyō",
+      "description": "Manuals, guides, and documents for Head Office Sales."
     },
     {
-      "slug": "division-02",
-      "name": "Division 02",
-      "description": "Ready for your division’s manuals and documents.",
-      "placeholder": true
+      "slug": "design",
+      "name": "Design Department",
+      "japanese": "設計部",
+      "romaji": "Sekkei-bu",
+      "description": "Manuals, guides, and documents for Design Department."
     },
     {
-      "slug": "division-03",
-      "name": "Division 03",
-      "description": "Ready for your division’s manuals and documents.",
-      "placeholder": true
+      "slug": "electrical-design",
+      "name": "Electrical Design Section",
+      "japanese": "電気設計課",
+      "romaji": "Denki Sekkei-ka",
+      "description": "Manuals, guides, and documents for Electrical Design Section.",
+      "parent": "design"
     },
     {
-      "slug": "division-04",
-      "name": "Division 04",
-      "description": "Ready for your division’s manuals and documents.",
-      "placeholder": true
+      "slug": "structural-design",
+      "name": "Structural Design Section",
+      "japanese": "構造設計課",
+      "romaji": "Kōzō Sekkei-ka",
+      "description": "Manuals, guides, and documents for Structural Design Section.",
+      "parent": "design"
     },
     {
-      "slug": "division-05",
-      "name": "Division 05",
-      "description": "Ready for your division’s manuals and documents.",
-      "placeholder": true
+      "slug": "production-management",
+      "name": "Production Management Department",
+      "japanese": "生産管理部",
+      "romaji": "Seisan Kanri-bu",
+      "description": "Manuals, guides, and documents for Production Management Department."
     },
     {
-      "slug": "division-06",
-      "name": "Division 06",
-      "description": "Ready for your division’s manuals and documents.",
-      "placeholder": true
+      "slug": "production-scheduling",
+      "name": "Production Scheduling Section",
+      "japanese": "工程課",
+      "romaji": "Kōtei-ka",
+      "description": "Manuals, guides, and documents for Production Scheduling Section.",
+      "parent": "production-management"
     },
     {
-      "slug": "division-07",
-      "name": "Division 07",
-      "description": "Ready for your division’s manuals and documents.",
-      "placeholder": true
+      "slug": "materials",
+      "name": "Materials Section",
+      "japanese": "資材課",
+      "romaji": "Shizai-ka",
+      "description": "Manuals, guides, and documents for Materials Section.",
+      "parent": "production-management"
     },
     {
-      "slug": "division-08",
-      "name": "Division 08",
-      "description": "Ready for your division’s manuals and documents.",
-      "placeholder": true
+      "slug": "general-affairs",
+      "name": "General Affairs Department",
+      "japanese": "総務部",
+      "romaji": "Sōmu-bu",
+      "description": "Manuals, guides, and documents for General Affairs Department."
     },
     {
-      "slug": "division-09",
-      "name": "Division 09",
-      "description": "Ready for your division’s manuals and documents.",
-      "placeholder": true
+      "slug": "ai-iot",
+      "name": "AI/IoT Group",
+      "japanese": "AI/IOTグループ",
+      "romaji": "AI/IoT Gurūpu",
+      "description": "Manuals, guides, and documents for AI/IoT Group."
     },
     {
-      "slug": "division-10",
-      "name": "Division 10",
-      "description": "Ready for your division’s manuals and documents.",
-      "placeholder": true
+      "slug": "manufacturing",
+      "name": "Manufacturing Department",
+      "japanese": "製造部",
+      "romaji": "Seizō-bu",
+      "description": "Manuals, guides, and documents for Manufacturing Department."
     },
     {
-      "slug": "division-11",
-      "name": "Division 11",
-      "description": "Ready for your division’s manuals and documents.",
-      "placeholder": true
+      "slug": "processing",
+      "name": "Processing Section",
+      "japanese": "加工課",
+      "romaji": "Kakō-ka",
+      "description": "Manuals, guides, and documents for Processing Section.",
+      "parent": "manufacturing"
     },
     {
-      "slug": "division-12",
-      "name": "Division 12",
-      "description": "Ready for your division’s manuals and documents.",
-      "placeholder": true
+      "slug": "frame",
+      "name": "Frame Section",
+      "japanese": "フレーム課",
+      "romaji": "Furēmu-ka",
+      "description": "Manuals, guides, and documents for Frame Section.",
+      "parent": "manufacturing"
     },
     {
-      "slug": "division-13",
-      "name": "Division 13",
-      "description": "Ready for your division’s manuals and documents.",
-      "placeholder": true
+      "slug": "thin-sheet-metal-1",
+      "name": "Thin Sheet Metal Section 1",
+      "japanese": "薄物1課",
+      "romaji": "Usumono Ichi-ka",
+      "description": "Manuals, guides, and documents for Thin Sheet Metal Section 1.",
+      "parent": "manufacturing"
     },
     {
-      "slug": "division-14",
-      "name": "Division 14",
-      "description": "Ready for your division’s manuals and documents.",
-      "placeholder": true
+      "slug": "painting",
+      "name": "Painting Section",
+      "japanese": "塗装課",
+      "romaji": "Tosō-ka",
+      "description": "Manuals, guides, and documents for Painting Section.",
+      "parent": "manufacturing"
     },
     {
-      "slug": "division-15",
-      "name": "Division 15",
-      "description": "Ready for your division’s manuals and documents.",
-      "placeholder": true
+      "slug": "wiring",
+      "name": "Wiring Department",
+      "japanese": "配線部",
+      "romaji": "Haisen-bu",
+      "description": "Manuals, guides, and documents for Wiring Department."
     },
     {
-      "slug": "division-16",
-      "name": "Division 16",
-      "description": "Ready for your division’s manuals and documents.",
-      "placeholder": true
+      "slug": "wiring-a1",
+      "name": "Wiring Section A-1",
+      "japanese": "A-1課",
+      "romaji": "A Ichi-ka",
+      "description": "Manuals, guides, and documents for Wiring Section A-1.",
+      "parent": "wiring"
     },
     {
-      "slug": "division-17",
-      "name": "Division 17",
-      "description": "Ready for your division’s manuals and documents.",
-      "placeholder": true
+      "slug": "wiring-a2-a3",
+      "name": "Wiring Section A-2 (A-3)",
+      "japanese": "A-2課（A-3課）",
+      "romaji": "A Ni-ka (A San-ka)",
+      "description": "Manuals, guides, and documents for Wiring Section A-2 (A-3).",
+      "parent": "wiring"
     },
     {
-      "slug": "division-18",
-      "name": "Division 18",
-      "description": "Ready for your division’s manuals and documents.",
-      "placeholder": true
+      "slug": "wiring-b1-b2",
+      "name": "Wiring Section B-1 (B-2)",
+      "japanese": "B-1課（B-2課）",
+      "romaji": "B Ichi-ka (B Ni-ka)",
+      "description": "Manuals, guides, and documents for Wiring Section B-1 (B-2).",
+      "parent": "wiring"
     },
     {
-      "slug": "division-19",
-      "name": "Division 19",
-      "description": "Ready for your division’s manuals and documents.",
-      "placeholder": true
+      "slug": "wiring-b3",
+      "name": "Wiring Section B-3",
+      "japanese": "B-3課",
+      "romaji": "B San-ka",
+      "description": "Manuals, guides, and documents for Wiring Section B-3.",
+      "parent": "wiring"
     },
     {
-      "slug": "division-20",
-      "name": "Division 20",
-      "description": "Ready for your division’s manuals and documents.",
-      "placeholder": true
+      "slug": "inspection",
+      "name": "Inspection Department",
+      "japanese": "検査部",
+      "romaji": "Kensa-bu",
+      "description": "Manuals, guides, and documents for Inspection Department."
     },
     {
-      "slug": "division-21",
-      "name": "Division 21",
-      "description": "Ready for your division’s manuals and documents.",
-      "placeholder": true
+      "slug": "quality-environment",
+      "name": "Quality and Environmental Management Department",
+      "japanese": "品質環境管理部",
+      "romaji": "Hinshitsu Kankyō Kanri-bu",
+      "description": "Manuals, guides, and documents for Quality and Environmental Management Department."
     },
     {
-      "slug": "division-22",
-      "name": "Division 22",
-      "description": "Ready for your division’s manuals and documents.",
-      "placeholder": true
+      "slug": "engineering",
+      "name": "Engineering Department",
+      "japanese": "エンジニアリング部",
+      "romaji": "Enjiniaringu-bu",
+      "description": "Manuals, guides, and documents for Engineering Department."
     },
     {
-      "slug": "division-23",
-      "name": "Division 23",
-      "description": "Ready for your division’s manuals and documents.",
-      "placeholder": true
+      "slug": "tokyo",
+      "name": "Tokyo Branch",
+      "japanese": "東京支店",
+      "romaji": "Tōkyō Shiten",
+      "description": "Manuals, guides, and documents for Tokyo Branch."
+    },
+    {
+      "slug": "osaka",
+      "name": "Osaka Branch",
+      "japanese": "大阪支店",
+      "romaji": "Ōsaka Shiten",
+      "description": "Manuals, guides, and documents for Osaka Branch."
+    },
+    {
+      "slug": "fukuoka",
+      "name": "Fukuoka Branch",
+      "japanese": "福岡支店",
+      "romaji": "Fukuoka Shiten",
+      "description": "Manuals, guides, and documents for Fukuoka Branch."
     }
   ],
   "categories": [
