@@ -46,7 +46,6 @@ const config: Config = {
       title: "KYORITSU",
       logo: { alt: "", src: "img/library.svg", href: homeUrl, target: "_self" },
       items: [
-        { href: homeUrl, label: "Home", position: "left", target: "_self" },
         { type: "localeDropdown", position: "right" },
         {
           to: "/",

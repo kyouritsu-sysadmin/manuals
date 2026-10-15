@@ -27,7 +27,7 @@ GitHub assigns `/manuals/` to the existing `manuals` repository. Publishing a ho
 
 The supplied workflow is designed for the root repository and deliberately will not deploy from a project repository. It builds and validates the home site without installing dependencies. Keep deploying the manuals from the existing `manuals` repository using its existing workflow. The two sites share the domain and link to each other, while retaining their own deployment history.
 
-No changes to the existing manuals document URLs or Japanese URLs are needed. The Home navigation item, document breadcrumb Home icon, and the KYORITSU logo in the manuals both navigate to `https://kyouritsu-sysadmin.github.io/` in the same tab.
+No changes to the existing manuals document URLs or Japanese URLs are needed. The document breadcrumb Home icon and the KYORITSU header in the manuals navigate to `https://kyouritsu-sysadmin.github.io/` in the same tab. There is no separate Home button in the manuals navigation.
 
 ## Combined local preview (from the manuals source repository)
 
@@ -38,6 +38,6 @@ npm run build:preview
 python3 -m http.server 3000 --directory ../portal/.preview --bind 127.0.0.1
 ```
 
-Open `http://127.0.0.1:3000/`, choose Manuals, and use Home to return. This assembles both sites for preview only; it does not change either production artifact or publish anything. `PREVIEW_HOME_URL` changes the preview host if needed.
+Open `http://127.0.0.1:3000/`, choose Manuals, and select the KYORITSU header to return home. This assembles both sites for preview only; it does not change either production artifact or publish anything. `PREVIEW_HOME_URL` changes the preview host if needed.
 
 Reference: [GitHub user/organization sites and project sites](https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages).

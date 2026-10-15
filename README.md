@@ -112,7 +112,7 @@ The browser downloads PDF.js and its worker, fonts, CMaps, and WASM from this si
 
 A separate, minimal company home page is in [`portal/`](portal/README.md). It has four cards: **Manuals**, **Training Guide**, **Company Map**, and **Company Official Documents**. Manuals opens `/manuals/` (or `/manuals/ja/` from the Japanese home page). The remaining cards are marked as coming soon until their destinations are configured.
 
-The manuals' **Home** link and KYORITSU logo now return to `https://kyouritsu-sysadmin.github.io/`. `HOME_URL` can override this destination for a local preview or another domain.
+The manuals' KYORITSU header and document breadcrumb Home icon return to `https://kyouritsu-sysadmin.github.io/`. There is no separate Home button in the manuals navigation. `HOME_URL` can override this destination for a local preview or another domain.
 
 The root home page must be published from `kyouritsu-sysadmin/kyouritsu-sysadmin.github.io`; deploying the existing `manuals` repository cannot populate the root address. The portal directory includes a standalone build, a manual Pages workflow, and [deployment instructions](portal/README.md). Existing manuals and Japanese document URLs remain unchanged.
 
