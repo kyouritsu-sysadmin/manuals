@@ -26,3 +26,5 @@ yarn-error.log*
 /i18n/ja/docusaurus-plugin-content-docs/current/
 /static/vendor/pdfjs/
 /.generated-vendor/
+/static/fonts/
+/static/theme.css

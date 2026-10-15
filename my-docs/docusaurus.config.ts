@@ -9,6 +9,7 @@ const config: Config = {
   favicon: "img/library.svg",
   url: process.env.SITE_URL || "https://kyouritsu-sysadmin.github.io",
   baseUrl: process.env.BASE_URL || "/manuals/",
+  stylesheets: [`${process.env.BASE_URL || "/manuals/"}theme.css`],
   trailingSlash: true,
   customFields: { homeUrl },
   organizationName: "kyouritsu-sysadmin",

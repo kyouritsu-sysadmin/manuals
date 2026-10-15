@@ -47,6 +47,10 @@ for (const locale of ["en", "ja"]) {
       html.includes(`href="${homeUrl}"`),
       `Missing root Home link: ${locale}/${route}`,
     );
+    assert(
+      html.includes(`href="${base}theme.css"`),
+      `Missing shared theme: ${locale}/${route}`,
+    );
     checks++;
     return html;
   }
@@ -132,6 +136,10 @@ for (const locale of ["en", "ja"]) {
     }
   }
   for (const file of [
+    "theme.css",
+    "fonts/fonts.css",
+    "fonts/mona-sans-latin-wght-normal.woff2",
+    "fonts/hubot-sans-latin-wght-normal.woff2",
     "404.html",
     ".nojekyll",
     "vendor/pdfjs/pdf.worker.min.mjs",
@@ -142,6 +150,18 @@ for (const locale of ["en", "ja"]) {
       `Missing runtime file: ${locale}/${file}`,
     );
     checks++;
+  }
+  const fontStyles = fs.readFileSync(
+    path.join(directory, "fonts/fonts.css"),
+    "utf8",
+  );
+  for (const [, file] of fontStyles.matchAll(/url\(\.\/([^)]*)\)/g)) {
+    const font = fs.readFileSync(path.join(directory, "fonts", file));
+    assert.equal(
+      font.subarray(0, 4).toString(),
+      "wOF2",
+      `Missing or invalid font: ${locale}/${file}`,
+    );
   }
 }
 console.log(

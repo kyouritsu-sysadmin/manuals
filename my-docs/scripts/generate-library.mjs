@@ -2,6 +2,16 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+// Share the portal's self-hosted fonts and palette with the manuals deployment.
+fs.cpSync(
+  path.join(root, "../portal/src/fonts"),
+  path.join(root, "static/fonts"),
+  { recursive: true },
+);
+fs.copyFileSync(
+  path.join(root, "../portal/src/theme.css"),
+  path.join(root, "static/theme.css"),
+);
 const catalog = JSON.parse(
   fs.readFileSync(path.join(root, "src/data/catalog.json"), "utf8"),
 );

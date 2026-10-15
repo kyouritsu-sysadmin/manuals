@@ -41,3 +41,7 @@ python3 -m http.server 3000 --directory ../portal/.preview --bind 127.0.0.1
 Open `http://127.0.0.1:3000/`, choose Manuals, and select the KYORITSU header to return home. This assembles both sites for preview only; it does not change either production artifact or publish anything. `PREVIEW_HOME_URL` changes the preview host if needed.
 
 Reference: [GitHub user/organization sites and project sites](https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages).
+
+## Shared visual theme
+
+`src/theme.css` contains the approved blue palette and typography tokens. `src/styles.css` styles the home page. Mona Sans, Hubot Sans, and Noto Sans JP are bundled in `src/fonts/` with their licenses; the build copies all assets into `dist/assets/`. Keep the complete `src/` directory when syncing this portal into the root homepage repository. In the manuals source repository, its generator also consumes this theme and these fonts.

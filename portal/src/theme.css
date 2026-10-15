@@ -1,0 +1,37 @@
+@import url("./fonts/fonts.css");
+
+/* Shared by the company home and document library. */
+:root {
+  color-scheme: light;
+  --color-snow: #f2f5fc;
+  --color-mist: #d6dfef;
+  --color-ice: #b1caec;
+  --color-sky: #88afdd;
+  --color-blue: #628fc8;
+  --color-deep-blue: #395780;
+  --color-ink: #24364b;
+  --color-white: #ffffff;
+  --color-muted: #4c617b;
+  --color-action-hover: #2d4668;
+  --color-error: #973b3b;
+  --color-error-surface: #fff1f1;
+  --font-body:
+    "Mona Sans", "Noto Sans JP", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  --font-heading:
+    "Hubot Sans", "Noto Sans JP", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  font-optical-sizing: auto;
+}
+
+html[lang="ja"] {
+  --ifm-line-height-base: 1.8;
+  line-height: 1.8;
+  letter-spacing: normal;
+}
+html[lang="ja"] h1,
+html[lang="ja"] h2,
+html[lang="ja"] h3 {
+  letter-spacing: normal;
+  line-height: 1.5;
+}

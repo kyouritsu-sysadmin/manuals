@@ -87,11 +87,14 @@ function cardMarkup(card, locale) {
 }
 fs.rmSync(output, { recursive: true, force: true });
 fs.mkdirSync(path.join(output, "assets"), { recursive: true });
-for (const file of ["styles.css", "logo.svg"])
+for (const file of ["styles.css", "theme.css", "logo.svg"])
   fs.copyFileSync(
     path.join(root, "src", file),
     path.join(output, "assets", file),
   );
+fs.cpSync(path.join(root, "src/fonts"), path.join(output, "assets/fonts"), {
+  recursive: true,
+});
 fs.writeFileSync(path.join(output, ".nojekyll"), "");
 for (const locale of ["en", "ja"]) {
   const ui = labels[locale];

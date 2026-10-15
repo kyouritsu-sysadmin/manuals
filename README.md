@@ -121,3 +121,9 @@ The manuals' KYORITSU header and document breadcrumb Home icon return to `https:
 The root home page must be published from `kyouritsu-sysadmin/kyouritsu-sysadmin.github.io`; deploying the existing `manuals` repository cannot populate the root address. The portal directory includes a standalone build, a manual Pages workflow, and [deployment instructions](portal/README.md). Existing manuals and Japanese document URLs remain unchanged.
 
 Build only the home site with `npm run build:portal` from `my-docs/`. To preview Home → Manuals → Home locally, run `npm run build:preview` and serve `portal/.preview/` as described in the portal guide.
+
+## Visual theme and fonts
+
+The homepage and library use the shared blue palette in `portal/src/theme.css`: Snow `#F2F5FC`, Mist `#D6DFEF`, Ice `#B1CAEC`, Sky `#88AFDD`, Blue `#628FC8`, and Deep Blue `#395780`. White cards and PDF paper use dark ink `#24364B`; secondary text uses `#4C617B` for contrast. Deep blue is used for primary actions, selection indicators, and keyboard focus.
+
+Mona Sans is used for body text and navigation, Hubot Sans for headings and branding, and Noto Sans JP for Japanese glyphs. Font assets and licenses are bundled in `portal/src/fonts/`; there are no runtime CDN requests. Unicode subsets load only as needed. The manuals generator copies the shared theme and fonts into `static/`, and the portal build includes them under `assets/`. Update the standalone homepage repository with the same portal source changes when publishing a theme update to both sites.
