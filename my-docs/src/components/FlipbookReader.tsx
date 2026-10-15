@@ -24,6 +24,7 @@ export default function FlipbookReader({
   const { t } = useLibraryLocale();
   const assets = useBaseUrl("/vendor/pdfjs/");
   const container = useRef<HTMLDivElement>(null);
+  const scroll = useRef<HTMLDivElement>(null);
   const mount = useRef<HTMLDivElement>(null);
   const engine = useRef<PageFlip | null>(null);
   const initial = useRef(initialPage);
@@ -33,6 +34,9 @@ export default function FlipbookReader({
   const [page, setPage] = useState(initialPage);
   const [entry, setEntry] = useState(String(initialPage));
   const [zoom, setZoom] = useState(1);
+  const zoomLevel = useRef(zoom);
+  zoomLevel.current = zoom;
+  const [viewport, setViewport] = useState({ width: 0, height: 0 });
   const [pagesOpen, setPagesOpen] = useState(false);
   const [ready, setReady] = useState(false);
   const [error, setError] = useState(false);
@@ -40,6 +44,23 @@ export default function FlipbookReader({
   const [expanded, setExpanded] = useState(false);
   const [orientation, setOrientation] = useState("portrait");
   const [pdf, setPdf] = useState<PDFDocumentProxy | null>(null);
+
+  useEffect(() => {
+    if (!scroll.current) return;
+    // Measure the space left after toolbars, hints, and thumbnails. Keep the
+    // book's layout independent of zoom so magnifying does not change spreads.
+    const observer = new ResizeObserver(([entry]) => {
+      const { width, height } = entry.contentRect;
+      setViewport({ width: Math.max(1, width), height: Math.max(1, height) });
+    });
+    observer.observe(scroll.current);
+    return () => observer.disconnect();
+  }, []);
+
+  function fit() {
+    setZoom(1);
+    scroll.current?.scrollTo({ left: 0, top: 0 });
+  }
 
   useEffect(() => {
     if (!mount.current) return;
@@ -175,13 +196,13 @@ export default function FlipbookReader({
         width: 460,
         height: Math.round((460 * dimensions.height) / dimensions.width),
         size: "stretch",
-        minWidth: 240,
-        maxWidth: 1000,
-        minHeight: 300,
+        minWidth: 240 * zoomLevel.current,
+        maxWidth: 4000,
+        minHeight: 1,
         maxHeight: 1500,
         showCover: true,
         usePortrait: true,
-        autoSize: true,
+        autoSize: false,
         maxShadowOpacity: 0.22,
         flippingTime: reducedMotion ? 1 : 550,
         showPageCorners: !reducedMotion,
@@ -206,7 +227,13 @@ export default function FlipbookReader({
       setPage(active + 1);
       setEntry(String(active + 1));
       setReady(true);
-      observer = new ResizeObserver(() => book?.update());
+      observer = new ResizeObserver(() => {
+        if (!book) return;
+        // Scale the portrait threshold together with the book, preserving
+        // its spread and accurate mouse/touch coordinates when zooming.
+        book.getSettings().minWidth = 240 * zoomLevel.current;
+        book.update();
+      });
       observer.observe(mount.current!);
       void renderAround(active).catch(() => {
         if (!cancelled) setError(true);
@@ -373,7 +400,7 @@ export default function FlipbookReader({
         >
           +
         </button>
-        <button type="button" onClick={() => setZoom(1)}>
+        <button type="button" onClick={fit}>
           {t("Fit")}
         </button>
         <button type="button" onClick={toggleFullscreen}>
@@ -409,6 +436,7 @@ export default function FlipbookReader({
         )}
         <div
           className="flipbook-scroll"
+          ref={scroll}
           tabIndex={0}
           role="region"
           aria-label={`${title} · ${t("Flipbook")}`}
@@ -432,11 +460,21 @@ export default function FlipbookReader({
             }
           }}
         >
-          <div className="flipbook-sizing" style={{ width: `${zoom * 100}%` }}>
+          <div
+            className="flipbook-sizing"
+            style={{
+              width: viewport.width * zoom,
+              height: viewport.height * zoom,
+            }}
+          >
             <div
               ref={mount}
               className="flipbook-mount"
-              style={{ visibility: ready ? "visible" : "hidden" }}
+              style={{
+                visibility: ready ? "visible" : "hidden",
+                width: viewport.width * zoom,
+                height: viewport.height * zoom,
+              }}
             />
           </div>
         </div>

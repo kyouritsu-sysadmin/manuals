@@ -497,6 +497,19 @@ body {
   overflow: hidden;
   margin-top: 28px;
 }
+.file-reader-pdf {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - var(--reader-top, 300px) - 16px);
+  height: calc(100dvh - var(--reader-top, 300px) - 16px);
+  min-height: var(--reader-min-height, 320px);
+}
+.file-reader-pdf > .reader-toolbar,
+.file-reader-pdf > .reader-modes,
+.file-reader-pdf .reader-hint,
+.flipbook-controls {
+  flex-shrink: 0;
+}
 .reader-toolbar {
   display: flex;
   justify-content: space-between;
@@ -523,8 +536,8 @@ body {
 }
 .pdf-frame {
   width: 100%;
-  height: 75vh;
-  min-height: 460px;
+  flex: 1;
+  min-height: 0;
   border: 0;
   display: block;
   background: #eeefea;
@@ -648,9 +661,6 @@ select:focus-visible {
     align-items: flex-start;
     flex-direction: column;
   }
-  .pdf-frame {
-    min-height: 400px;
-  }
   .sample-tag {
     margin-left: 0;
     display: table;
@@ -694,6 +704,10 @@ select:focus-visible {
 .flipbook-reader {
   background: #eff1ec;
   color: #26372f;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
 }
 .flipbook-reader:fullscreen {
   display: flex;
@@ -748,7 +762,9 @@ select:focus-visible {
 .flipbook-body {
   display: flex;
   position: relative;
-  min-height: 360px;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
 }
 .flipbook-body[hidden] {
   display: none;
@@ -757,21 +773,20 @@ select:focus-visible {
   width: 100%;
   min-width: 0;
   overflow: auto;
-  max-height: 85vh;
+  min-height: 0;
   padding: 24px;
   outline-offset: -3px;
 }
 .flipbook-sizing {
-  min-width: 240px;
   max-width: none;
   margin: 0 auto;
 }
-.flipbook-mount {
-  width: 100%;
-  min-height: 320px;
-}
 .flipbook {
   margin: 0 auto;
+  width: 100%;
+  height: 100%;
+  /* PageFlip's portrait threshold must not impose a minimum layout width. */
+  min-width: 0 !important;
 }
 .flipbook-page {
   background: #fff;
@@ -815,7 +830,7 @@ select:focus-visible {
 .flipbook-thumbnails {
   width: 150px;
   flex-shrink: 0;
-  max-height: 75vh;
+  min-height: 0;
   overflow: auto;
   background: #e1e6dc;
   padding: 14px;
@@ -865,16 +880,12 @@ select:focus-visible {
   .flipbook-thumbnails {
     width: 84px;
     padding: 6px;
-    max-height: 60vh;
   }
   .flipbook-sizing {
     min-width: 0;
   }
   .reader-actions {
     flex-wrap: wrap;
-  }
-  .flipbook-body {
-    min-height: 300px;
   }
 }
 
@@ -890,8 +901,4 @@ select:focus-visible {
 .flipbook-expanded .flipbook-body {
   flex: 1;
   min-height: 0;
-}
-.flipbook-expanded .flipbook-scroll,
-.flipbook-reader:fullscreen .flipbook-scroll {
-  max-height: calc(100vh - 135px);
 }

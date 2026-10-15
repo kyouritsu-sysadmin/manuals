@@ -11,6 +11,7 @@ declare module "page-flip" {
     turnToPage(page: number): void;
     getCurrentPageIndex(): number;
     getOrientation(): "portrait" | "landscape";
+    getSettings(): { minWidth: number };
     update(): void;
     destroy(): void;
     on(event: string, callback: (event: { data: unknown }) => void): PageFlip;
