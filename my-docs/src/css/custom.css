@@ -666,3 +666,232 @@ select:focus-visible {
     transform: none;
   }
 }
+
+/* Self-hosted PDF flipbook. The standard PDF mode remains available. */
+.reader-modes {
+  display: flex;
+  gap: 6px;
+  padding: 12px 18px;
+  border-bottom: 1px solid var(--border);
+  background: #fff;
+}
+.reader-modes button,
+.flipbook-controls button {
+  border: 1px solid #dce2d8;
+  background: white;
+  border-radius: 5px;
+  padding: 7px 10px;
+  color: #3e5847;
+  font: inherit;
+  font-size: 12px;
+  cursor: pointer;
+}
+.reader-modes button[aria-pressed="true"] {
+  background: #245d49;
+  border-color: #245d49;
+  color: white;
+}
+.flipbook-reader {
+  background: #eff1ec;
+  color: #26372f;
+}
+.flipbook-reader:fullscreen {
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  padding: 12px;
+}
+.flipbook-reader:fullscreen .flipbook-body {
+  flex: 1;
+  min-height: 0;
+}
+.flipbook-controls {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 12px 16px;
+  background: #f8faf6;
+  border-bottom: 1px solid #dce2d8;
+}
+.flipbook-controls button:hover:not(:disabled) {
+  background: #e6eee2;
+}
+.flipbook-controls button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+.flipbook-controls form {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+  font-size: 12px;
+}
+.flipbook-controls input {
+  width: 56px;
+  border: 1px solid #cbd5c6;
+  border-radius: 4px;
+  background: white;
+  padding: 5px;
+  color: inherit;
+  font: inherit;
+}
+.flipbook-controls output {
+  min-width: 38px;
+  text-align: center;
+  font-size: 12px;
+}
+.flipbook-control-spacer {
+  flex: 1;
+}
+.flipbook-body {
+  display: flex;
+  position: relative;
+  min-height: 360px;
+}
+.flipbook-body[hidden] {
+  display: none;
+}
+.flipbook-scroll {
+  width: 100%;
+  min-width: 0;
+  overflow: auto;
+  max-height: 85vh;
+  padding: 24px;
+  outline-offset: -3px;
+}
+.flipbook-sizing {
+  min-width: 240px;
+  max-width: none;
+  margin: 0 auto;
+}
+.flipbook-mount {
+  width: 100%;
+  min-height: 320px;
+}
+.flipbook {
+  margin: 0 auto;
+}
+.flipbook-page {
+  background: #fff;
+  overflow: hidden;
+  box-shadow: inset 0 0 2px #b9c5b6;
+}
+.flipbook-page img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: #fff;
+  user-select: none;
+}
+.flipbook-page img[hidden],
+.flipbook-placeholder[hidden] {
+  display: none;
+}
+.flipbook-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  color: #667864;
+  padding: 12px;
+  text-align: center;
+}
+.flipbook-loading,
+.flipbook-error {
+  text-align: center;
+  padding: 24px;
+  margin: 0;
+  font-size: 13px;
+}
+.flipbook-error {
+  color: #8f362a;
+  background: #fff1ec;
+}
+.flipbook-thumbnails {
+  width: 150px;
+  flex-shrink: 0;
+  max-height: 75vh;
+  overflow: auto;
+  background: #e1e6dc;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.flipbook-thumbnails button {
+  border: 2px solid transparent;
+  border-radius: 5px;
+  background: #fff;
+  padding: 6px;
+  cursor: pointer;
+  flex-shrink: 0;
+  font: inherit;
+  font-size: 11px;
+  color: #375439;
+}
+.flipbook-thumbnails button[aria-current="page"] {
+  border-color: #245d49;
+}
+.flipbook-thumbnails canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  min-height: 80px;
+}
+.flipbook-thumbnails span {
+  display: block;
+  margin-top: 5px;
+}
+@media (max-width: 700px) {
+  .flipbook-controls {
+    padding: 10px;
+    gap: 6px;
+  }
+  .flipbook-controls button {
+    padding: 7px 8px;
+    font-size: 11px;
+  }
+  .flipbook-control-spacer {
+    display: none;
+  }
+  .flipbook-scroll {
+    padding: 10px;
+  }
+  .flipbook-thumbnails {
+    width: 84px;
+    padding: 6px;
+    max-height: 60vh;
+  }
+  .flipbook-sizing {
+    min-width: 0;
+  }
+  .reader-actions {
+    flex-wrap: wrap;
+  }
+  .flipbook-body {
+    min-height: 300px;
+  }
+}
+
+.flipbook-expanded {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  padding: 12px;
+}
+.flipbook-expanded .flipbook-body {
+  flex: 1;
+  min-height: 0;
+}
+.flipbook-expanded .flipbook-scroll,
+.flipbook-reader:fullscreen .flipbook-scroll {
+  max-height: calc(100vh - 135px);
+}

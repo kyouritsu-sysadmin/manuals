@@ -1,0 +1,416 @@
+{
+  "sidebar.sales.link.← All divisions": {
+    "message": "← すべての部門"
+  },
+  "sidebar.sales.link.Sales overview": {
+    "message": "営業部の資料"
+  },
+  "sidebar.sales.category.Manuals": {
+    "message": "マニュアル"
+  },
+  "sidebar.sales.category.Guides": {
+    "message": "ガイド"
+  },
+  "sidebar.sales.category.Policies": {
+    "message": "規程"
+  },
+  "sidebar.sales.category.Forms": {
+    "message": "様式"
+  },
+  "sidebar.division-02.link.← All divisions": {
+    "message": "← すべての部門"
+  },
+  "sidebar.division-02.link.Division 02 overview": {
+    "message": "部門 02の資料"
+  },
+  "sidebar.division-02.category.Manuals": {
+    "message": "マニュアル"
+  },
+  "sidebar.division-02.category.Guides": {
+    "message": "ガイド"
+  },
+  "sidebar.division-02.category.Policies": {
+    "message": "規程"
+  },
+  "sidebar.division-02.category.Forms": {
+    "message": "様式"
+  },
+  "sidebar.division-03.link.← All divisions": {
+    "message": "← すべての部門"
+  },
+  "sidebar.division-03.link.Division 03 overview": {
+    "message": "部門 03の資料"
+  },
+  "sidebar.division-03.category.Manuals": {
+    "message": "マニュアル"
+  },
+  "sidebar.division-03.category.Guides": {
+    "message": "ガイド"
+  },
+  "sidebar.division-03.category.Policies": {
+    "message": "規程"
+  },
+  "sidebar.division-03.category.Forms": {
+    "message": "様式"
+  },
+  "sidebar.division-04.link.← All divisions": {
+    "message": "← すべての部門"
+  },
+  "sidebar.division-04.link.Division 04 overview": {
+    "message": "部門 04の資料"
+  },
+  "sidebar.division-04.category.Manuals": {
+    "message": "マニュアル"
+  },
+  "sidebar.division-04.category.Guides": {
+    "message": "ガイド"
+  },
+  "sidebar.division-04.category.Policies": {
+    "message": "規程"
+  },
+  "sidebar.division-04.category.Forms": {
+    "message": "様式"
+  },
+  "sidebar.division-05.link.← All divisions": {
+    "message": "← すべての部門"
+  },
+  "sidebar.division-05.link.Division 05 overview": {
+    "message": "部門 05の資料"
+  },
+  "sidebar.division-05.category.Manuals": {
+    "message": "マニュアル"
+  },
+  "sidebar.division-05.category.Guides": {
+    "message": "ガイド"
+  },
+  "sidebar.division-05.category.Policies": {
+    "message": "規程"
+  },
+  "sidebar.division-05.category.Forms": {
+    "message": "様式"
+  },
+  "sidebar.division-06.link.← All divisions": {
+    "message": "← すべての部門"
+  },
+  "sidebar.division-06.link.Division 06 overview": {
+    "message": "部門 06の資料"
+  },
+  "sidebar.division-06.category.Manuals": {
+    "message": "マニュアル"
+  },
+  "sidebar.division-06.category.Guides": {
+    "message": "ガイド"
+  },
+  "sidebar.division-06.category.Policies": {
+    "message": "規程"
+  },
+  "sidebar.division-06.category.Forms": {
+    "message": "様式"
+  },
+  "sidebar.division-07.link.← All divisions": {
+    "message": "← すべての部門"
+  },
+  "sidebar.division-07.link.Division 07 overview": {
+    "message": "部門 07の資料"
+  },
+  "sidebar.division-07.category.Manuals": {
+    "message": "マニュアル"
+  },
+  "sidebar.division-07.category.Guides": {
+    "message": "ガイド"
+  },
+  "sidebar.division-07.category.Policies": {
+    "message": "規程"
+  },
+  "sidebar.division-07.category.Forms": {
+    "message": "様式"
+  },
+  "sidebar.division-08.link.← All divisions": {
+    "message": "← すべての部門"
+  },
+  "sidebar.division-08.link.Division 08 overview": {
+    "message": "部門 08の資料"
+  },
+  "sidebar.division-08.category.Manuals": {
+    "message": "マニュアル"
+  },
+  "sidebar.division-08.category.Guides": {
+    "message": "ガイド"
+  },
+  "sidebar.division-08.category.Policies": {
+    "message": "規程"
+  },
+  "sidebar.division-08.category.Forms": {
+    "message": "様式"
+  },
+  "sidebar.division-09.link.← All divisions": {
+    "message": "← すべての部門"
+  },
+  "sidebar.division-09.link.Division 09 overview": {
+    "message": "部門 09の資料"
+  },
+  "sidebar.division-09.category.Manuals": {
+    "message": "マニュアル"
+  },
+  "sidebar.division-09.category.Guides": {
+    "message": "ガイド"
+  },
+  "sidebar.division-09.category.Policies": {
+    "message": "規程"
+  },
+  "sidebar.division-09.category.Forms": {
+    "message": "様式"
+  },
+  "sidebar.division-10.link.← All divisions": {
+    "message": "← すべての部門"
+  },
+  "sidebar.division-10.link.Division 10 overview": {
+    "message": "部門 10の資料"
+  },
+  "sidebar.division-10.category.Manuals": {
+    "message": "マニュアル"
+  },
+  "sidebar.division-10.category.Guides": {
+    "message": "ガイド"
+  },
+  "sidebar.division-10.category.Policies": {
+    "message": "規程"
+  },
+  "sidebar.division-10.category.Forms": {
+    "message": "様式"
+  },
+  "sidebar.division-11.link.← All divisions": {
+    "message": "← すべての部門"
+  },
+  "sidebar.division-11.link.Division 11 overview": {
+    "message": "部門 11の資料"
+  },
+  "sidebar.division-11.category.Manuals": {
+    "message": "マニュアル"
+  },
+  "sidebar.division-11.category.Guides": {
+    "message": "ガイド"
+  },
+  "sidebar.division-11.category.Policies": {
+    "message": "規程"
+  },
+  "sidebar.division-11.category.Forms": {
+    "message": "様式"
+  },
+  "sidebar.division-12.link.← All divisions": {
+    "message": "← すべての部門"
+  },
+  "sidebar.division-12.link.Division 12 overview": {
+    "message": "部門 12の資料"
+  },
+  "sidebar.division-12.category.Manuals": {
+    "message": "マニュアル"
+  },
+  "sidebar.division-12.category.Guides": {
+    "message": "ガイド"
+  },
+  "sidebar.division-12.category.Policies": {
+    "message": "規程"
+  },
+  "sidebar.division-12.category.Forms": {
+    "message": "様式"
+  },
+  "sidebar.division-13.link.← All divisions": {
+    "message": "← すべての部門"
+  },
+  "sidebar.division-13.link.Division 13 overview": {
+    "message": "部門 13の資料"
+  },
+  "sidebar.division-13.category.Manuals": {
+    "message": "マニュアル"
+  },
+  "sidebar.division-13.category.Guides": {
+    "message": "ガイド"
+  },
+  "sidebar.division-13.category.Policies": {
+    "message": "規程"
+  },
+  "sidebar.division-13.category.Forms": {
+    "message": "様式"
+  },
+  "sidebar.division-14.link.← All divisions": {
+    "message": "← すべての部門"
+  },
+  "sidebar.division-14.link.Division 14 overview": {
+    "message": "部門 14の資料"
+  },
+  "sidebar.division-14.category.Manuals": {
+    "message": "マニュアル"
+  },
+  "sidebar.division-14.category.Guides": {
+    "message": "ガイド"
+  },
+  "sidebar.division-14.category.Policies": {
+    "message": "規程"
+  },
+  "sidebar.division-14.category.Forms": {
+    "message": "様式"
+  },
+  "sidebar.division-15.link.← All divisions": {
+    "message": "← すべての部門"
+  },
+  "sidebar.division-15.link.Division 15 overview": {
+    "message": "部門 15の資料"
+  },
+  "sidebar.division-15.category.Manuals": {
+    "message": "マニュアル"
+  },
+  "sidebar.division-15.category.Guides": {
+    "message": "ガイド"
+  },
+  "sidebar.division-15.category.Policies": {
+    "message": "規程"
+  },
+  "sidebar.division-15.category.Forms": {
+    "message": "様式"
+  },
+  "sidebar.division-16.link.← All divisions": {
+    "message": "← すべての部門"
+  },
+  "sidebar.division-16.link.Division 16 overview": {
+    "message": "部門 16の資料"
+  },
+  "sidebar.division-16.category.Manuals": {
+    "message": "マニュアル"
+  },
+  "sidebar.division-16.category.Guides": {
+    "message": "ガイド"
+  },
+  "sidebar.division-16.category.Policies": {
+    "message": "規程"
+  },
+  "sidebar.division-16.category.Forms": {
+    "message": "様式"
+  },
+  "sidebar.division-17.link.← All divisions": {
+    "message": "← すべての部門"
+  },
+  "sidebar.division-17.link.Division 17 overview": {
+    "message": "部門 17の資料"
+  },
+  "sidebar.division-17.category.Manuals": {
+    "message": "マニュアル"
+  },
+  "sidebar.division-17.category.Guides": {
+    "message": "ガイド"
+  },
+  "sidebar.division-17.category.Policies": {
+    "message": "規程"
+  },
+  "sidebar.division-17.category.Forms": {
+    "message": "様式"
+  },
+  "sidebar.division-18.link.← All divisions": {
+    "message": "← すべての部門"
+  },
+  "sidebar.division-18.link.Division 18 overview": {
+    "message": "部門 18の資料"
+  },
+  "sidebar.division-18.category.Manuals": {
+    "message": "マニュアル"
+  },
+  "sidebar.division-18.category.Guides": {
+    "message": "ガイド"
+  },
+  "sidebar.division-18.category.Policies": {
+    "message": "規程"
+  },
+  "sidebar.division-18.category.Forms": {
+    "message": "様式"
+  },
+  "sidebar.division-19.link.← All divisions": {
+    "message": "← すべての部門"
+  },
+  "sidebar.division-19.link.Division 19 overview": {
+    "message": "部門 19の資料"
+  },
+  "sidebar.division-19.category.Manuals": {
+    "message": "マニュアル"
+  },
+  "sidebar.division-19.category.Guides": {
+    "message": "ガイド"
+  },
+  "sidebar.division-19.category.Policies": {
+    "message": "規程"
+  },
+  "sidebar.division-19.category.Forms": {
+    "message": "様式"
+  },
+  "sidebar.division-20.link.← All divisions": {
+    "message": "← すべての部門"
+  },
+  "sidebar.division-20.link.Division 20 overview": {
+    "message": "部門 20の資料"
+  },
+  "sidebar.division-20.category.Manuals": {
+    "message": "マニュアル"
+  },
+  "sidebar.division-20.category.Guides": {
+    "message": "ガイド"
+  },
+  "sidebar.division-20.category.Policies": {
+    "message": "規程"
+  },
+  "sidebar.division-20.category.Forms": {
+    "message": "様式"
+  },
+  "sidebar.division-21.link.← All divisions": {
+    "message": "← すべての部門"
+  },
+  "sidebar.division-21.link.Division 21 overview": {
+    "message": "部門 21の資料"
+  },
+  "sidebar.division-21.category.Manuals": {
+    "message": "マニュアル"
+  },
+  "sidebar.division-21.category.Guides": {
+    "message": "ガイド"
+  },
+  "sidebar.division-21.category.Policies": {
+    "message": "規程"
+  },
+  "sidebar.division-21.category.Forms": {
+    "message": "様式"
+  },
+  "sidebar.division-22.link.← All divisions": {
+    "message": "← すべての部門"
+  },
+  "sidebar.division-22.link.Division 22 overview": {
+    "message": "部門 22の資料"
+  },
+  "sidebar.division-22.category.Manuals": {
+    "message": "マニュアル"
+  },
+  "sidebar.division-22.category.Guides": {
+    "message": "ガイド"
+  },
+  "sidebar.division-22.category.Policies": {
+    "message": "規程"
+  },
+  "sidebar.division-22.category.Forms": {
+    "message": "様式"
+  },
+  "sidebar.division-23.link.← All divisions": {
+    "message": "← すべての部門"
+  },
+  "sidebar.division-23.link.Division 23 overview": {
+    "message": "部門 23の資料"
+  },
+  "sidebar.division-23.category.Manuals": {
+    "message": "マニュアル"
+  },
+  "sidebar.division-23.category.Guides": {
+    "message": "ガイド"
+  },
+  "sidebar.division-23.category.Policies": {
+    "message": "規程"
+  },
+  "sidebar.division-23.category.Forms": {
+    "message": "様式"
+  }
+}

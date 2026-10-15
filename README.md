@@ -12,7 +12,7 @@ npm ci
 npm start
 ```
 
-The local library is at `http://localhost:3000/manuals/`. The homepage includes document search (metadata, not PDF full text), format filters, and division navigation. PDF pages have a native browser preview, an original-file link, and a download action. Other file types can be downloaded, while Markdown/MDX guides render as web pages.
+The local library is at `http://localhost:3000/manuals/`. The homepage includes document search (metadata, not PDF full text), format filters, and division navigation. PDF pages open in a self-hosted flipbook with page-turn animation, thumbnails, page-number jumps, keyboard navigation, zoom, and fullscreen (with an expanded-view fallback). A Standard PDF tab provides the browser reader for text selection, search, and printing. Open and download actions remain available. Other file types can be downloaded, while Markdown/MDX guides render as web pages.
 
 ## URL structure
 
@@ -68,7 +68,7 @@ npm run build
 npm run check:build
 ```
 
-The catalog generator rejects duplicate or invalid slugs, unknown divisions/categories, missing content files, and missing required metadata. The production check verifies all division/category/document pages, base URLs, attachment integrity, the 404 page, and `.nojekyll`.
+The catalog generator rejects duplicate or invalid slugs, unknown divisions/categories, missing content files, and missing required metadata. The production check verifies both English and Japanese division/category/document pages, localized links, asset URLs, attachment integrity, PDF.js runtime files, the 404 page, and `.nojekyll`.
 
 ## Manually publish to GitHub Pages
 
@@ -86,8 +86,24 @@ There is no sign-in layer in this static site. Use it only for documents appropr
 ## Migration notes
 
 - The unmodified old viewer files that were in `my-docs/static/` are preserved in `my-docs/legacy/`, outside the deployed output. Their `index.html` conflicted with the new homepage; the old PDF component also referenced a nonexistent viewer path.
-- The new PDF preview uses the browser's reader. Page-turn animation is not part of the new library.
+- The default PDF preview uses PDF.js and page-flip for a responsive animated flipbook. Standard PDF mode uses the browser reader. Switching modes preserves the last flipbook page; page changes inside the browser reader cannot be read back by the site.
 - Docusaurus tutorial and blog examples are archived in `my-docs/legacy/` and excluded from the site. There is one clearly labeled sample guide, with no invented company policy.
 - Existing root PDF.js, images, and other flipbook assets remain untouched and are not copied into the new build.
 
 References: [Docusaurus deployment](https://docusaurus.io/docs/deployment), [Docusaurus documentation routes](https://docusaurus.io/docs/api/plugins/@docusaurus/plugin-content-docs).
+
+## Japanese localization
+
+English remains at `/manuals/`; Japanese is built at `/manuals/ja/`. The language menu preserves the current document route. Run `npm run build` to build both locales, or `npm start -- --locale ja` for Japanese development.
+
+- Edit custom interface and catalog translations in `my-docs/src/data/locales/ja.json`. Division/category keys are their slugs; document keys are `<division>/<category>/<slug>`.
+- Add Japanese Markdown/MDX under `my-docs/content/ja/` and set its `source` in the matching Japanese document entry. Missing translations fall back to the English catalog/content.
+- Docusaurus navigation and sidebar translations live under `my-docs/i18n/ja/`.
+- The `i18n/ja/docusaurus-plugin-content-docs/current/` folder is generated before start/build/typecheck; edit `content/ja/` and translation metadata instead.
+- Changing the interface language does not translate or replace an attached PDF. Both locales use the same original PDF unless its catalog attachment is changed.
+
+## Flipbook implementation
+
+The browser downloads PDF.js and its worker, fonts, CMaps, and WASM from this site; no Google Drive integration or external viewer/CDN is used. The generator copies matching runtime files from the pinned PDF.js package. Node.js 24 is required. Nearby pages are rendered into bounded bitmaps and old bitmaps are released; thumbnails render when their panel scrolls into view. Standard PDF mode remains available for selectable text, PDF search, browser printing, and preview failures.
+
+`page-flip@2.0.7` does not stop its animation loop when destroyed. The generator applies a small, checked lifecycle fix to a generated copy and preserves its license. Recheck that patch when upgrading the package. Never edit generated assets directly.

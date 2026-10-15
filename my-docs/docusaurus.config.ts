@@ -13,7 +13,14 @@ const config: Config = {
   deploymentBranch: "gh-pages",
   onBrokenLinks: "throw",
   onBrokenAnchors: "throw",
-  i18n: { defaultLocale: "en", locales: ["en"] },
+  i18n: {
+    defaultLocale: "en",
+    locales: ["en", "ja"],
+    localeConfigs: {
+      en: { label: "English" },
+      ja: { label: "日本語", htmlLang: "ja" },
+    },
+  },
   plugins: ["./plugins/library.cjs"],
   presets: [
     [
@@ -36,6 +43,7 @@ const config: Config = {
       title: "KYORITSU",
       logo: { alt: "", src: "img/library.svg" },
       items: [
+        { type: "localeDropdown", position: "right" },
         {
           to: "/",
           label: "Document library",

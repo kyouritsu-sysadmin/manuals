@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import Link from "@docusaurus/Link";
 import Layout from "@theme/Layout";
 import Heading from "@theme/Heading";
-import catalog from "@site/src/data/library";
+import useLibraryLocale from "./useLibraryLocale";
 
 type Props = { division?: string; category?: string | null };
 export default function Library({ division, category }: Props) {
+  const { t, catalog } = useLibraryLocale();
   const [query, setQuery] = useState("");
   const [format, setFormat] = useState("all");
   const currentDivision = catalog.divisions.find(
@@ -44,25 +45,27 @@ export default function Library({ division, category }: Props) {
     ? currentCategory.name
     : currentDivision
       ? currentDivision.name
-      : "A place for every document.";
+      : t("A place for every document.");
   return (
     <Layout
       title={
         currentDivision
           ? `${currentDivision.name}${currentCategory ? " · " + currentCategory.name : ""}`
-          : "Document library"
+          : t("Document library")
       }
-      description="Find manuals, guides, and documents across Kyoritsu divisions."
+      description={t(
+        "Find manuals, guides, and documents across Kyoritsu divisions.",
+      )}
     >
       <div className="library-shell">
-        <aside className="library-sidebar" aria-label="Library navigation">
-          <div className="sidebar-label">WORKSPACE</div>
+        <aside className="library-sidebar" aria-label={t("Library navigation")}>
+          <div className="sidebar-label">{t("WORKSPACE")}</div>
           <Link className={`side-link ${!division ? "selected" : ""}`} to="/">
-            <span>▦</span> All documents{" "}
+            <span>▦</span> {t("All documents")}{" "}
             <span className="count">{catalog.documents.length}</span>
           </Link>
           <div className="sidebar-label division-label">
-            DIVISIONS <span>{catalog.divisions.length}</span>
+            {t("DIVISIONS")} <span>{catalog.divisions.length}</span>
           </div>
           <nav>
             {catalog.divisions.map((item) => (
@@ -81,14 +84,14 @@ export default function Library({ division, category }: Props) {
             ))}
           </nav>
           <div className="sidebar-note">
-            One library.
+            {t("One library.")}
             <br />
-            Knowledge across every team.
+            {t("Knowledge across every team.")}
           </div>
         </aside>
         <main className="library-main" id="library-content">
-          <nav className="library-breadcrumb" aria-label="Breadcrumb">
-            <Link to="/">Library</Link>
+          <nav className="library-breadcrumb" aria-label={t("Breadcrumb")}>
+            <Link to="/">{t("Library")}</Link>
             {currentDivision && (
               <>
                 <span>/</span>
@@ -104,24 +107,28 @@ export default function Library({ division, category }: Props) {
           </nav>
           <header className="library-hero">
             <div className="eyebrow">
-              {currentDivision ? "DIVISION LIBRARY" : "THE KNOWLEDGE LIBRARY"}
+              {currentDivision
+                ? t("DIVISION LIBRARY")
+                : t("THE KNOWLEDGE LIBRARY")}
             </div>
             <h1>{title}</h1>
             <p>
               {currentDivision
                 ? currentDivision.description
-                : "Find the guidance you need. Manuals, resources, and shared knowledge — organized by the teams behind them."}
+                : t(
+                    "Find the guidance you need. Manuals, resources, and shared knowledge — organized by the teams behind them.",
+                  )}
             </p>
             {!division && (
               <div className="library-stats">
                 <span>
-                  <strong>{catalog.divisions.length}</strong> divisions
+                  <strong>{catalog.divisions.length}</strong> {t("divisions")}
                 </span>
                 <span>
-                  <strong>{catalog.documents.length}</strong> documents
+                  <strong>{catalog.documents.length}</strong> {t("documents")}
                 </span>
                 <span className="status-label">
-                  <i /> One shared library
+                  <i /> {t("One shared library")}
                 </span>
               </div>
             )}
@@ -141,7 +148,7 @@ export default function Library({ division, category }: Props) {
                 <path d="m16 16 5 5" />
               </svg>
               <span className="sr-only">
-                Search document titles, descriptions, and divisions
+                {t("Search document titles, descriptions, and divisions")}
               </span>
               <input
                 type="search"
@@ -149,37 +156,40 @@ export default function Library({ division, category }: Props) {
                 onChange={(event) => setQuery(event.target.value)}
                 placeholder={
                   division
-                    ? "Search this division…"
-                    : "Search documents or divisions…"
+                    ? t("Search this division…")
+                    : t("Search documents or divisions…")
                 }
               />
               {query && (
                 <button
                   type="button"
                   onClick={() => setQuery("")}
-                  aria-label="Clear search"
+                  aria-label={t("Clear search")}
                 >
                   ×
                 </button>
               )}
             </label>
             <label className="format-select">
-              <span className="sr-only">Document format</span>
+              <span className="sr-only">{t("Document format")}</span>
               <select
                 value={format}
                 onChange={(event) => setFormat(event.target.value)}
               >
-                <option value="all">All formats</option>
+                <option value="all">{t("All formats")}</option>
                 <option value="PDF">PDF</option>
-                <option value="Guide">Guides</option>
-                <option value="File">Files</option>
+                <option value="Guide">{t("Guides")}</option>
+                <option value="File">{t("Files")}</option>
               </select>
             </label>
           </div>
           {division && (
-            <nav className="category-tabs" aria-label="Document categories">
+            <nav
+              className="category-tabs"
+              aria-label={t("Document categories")}
+            >
               <Link className={!category ? "active" : ""} to={`/${division}/`}>
-                All documents
+                {t("All documents")}
               </Link>
               {catalog.categories.map((item) => (
                 <Link
@@ -199,14 +209,14 @@ export default function Library({ division, category }: Props) {
             <div className="section-title">
               <h2 id="documents-heading">
                 {search
-                  ? "Search results"
+                  ? t("Search results")
                   : currentCategory
                     ? currentCategory.name
-                    : "Documents"}{" "}
+                    : t("Documents")}{" "}
                 <span>{documents.length}</span>
               </h2>
               <span className="section-caption">
-                {division ? currentDivision?.name : "Across your workspace"}
+                {division ? currentDivision?.name : t("Across your workspace")}
               </span>
             </div>
             <div className="document-list" aria-live="polite">
@@ -235,7 +245,9 @@ export default function Library({ division, category }: Props) {
                   <span className="document-info">
                     <span className="document-title">
                       {doc.title}
-                      {doc.sample && <span className="sample-tag">Sample</span>}
+                      {doc.sample && (
+                        <span className="sample-tag">{t("Sample")}</span>
+                      )}
                     </span>
                     <span className="document-description">
                       {doc.description}
@@ -257,7 +269,7 @@ export default function Library({ division, category }: Props) {
                     </span>
                   </span>
                   <span className="document-date">
-                    <span className="format-badge">{doc.format}</span>
+                    <span className="format-badge">{t(doc.format)}</span>
                     <time dateTime={doc.updated}>{doc.updated}</time>
                   </span>
                   <span className="row-arrow" aria-hidden="true">
@@ -270,13 +282,15 @@ export default function Library({ division, category }: Props) {
                   <span aria-hidden="true">▤</span>
                   <h3>
                     {query || format !== "all"
-                      ? "No matching documents"
-                      : "A home for your team’s knowledge"}
+                      ? t("No matching documents")
+                      : t("A home for your team’s knowledge")}
                   </h3>
                   <p>
                     {query || format !== "all"
-                      ? "Try another search or select a different format."
-                      : "There are no documents here yet. Published resources will appear in this space."}
+                      ? t("Try another search or select a different format.")
+                      : t(
+                          "There are no documents here yet. Published resources will appear in this space.",
+                        )}
                   </p>
                   {(query || format !== "all") && (
                     <button
@@ -286,7 +300,7 @@ export default function Library({ division, category }: Props) {
                         setFormat("all");
                       }}
                     >
-                      Clear filters
+                      {t("Clear filters")}
                     </button>
                   )}
                 </div>
@@ -297,9 +311,11 @@ export default function Library({ division, category }: Props) {
             <section className="divisions-section" aria-labelledby="divisions">
               <div className="section-title">
                 <Heading as="h2" id="divisions">
-                  Browse divisions <span>{divisions.length}</span>
+                  {t("Browse divisions")} <span>{divisions.length}</span>
                 </Heading>
-                <span className="section-caption">Find your team’s space</span>
+                <span className="section-caption">
+                  {t("Find your team’s space")}
+                </span>
               </div>
               <div className="division-grid">
                 {divisions.map((item) => {
@@ -321,23 +337,25 @@ export default function Library({ division, category }: Props) {
                       <h3>{item.name}</h3>
                       <p>
                         {item.placeholder
-                          ? "Division name to be configured"
+                          ? t("Division name to be configured")
                           : item.description}
                       </p>
                       <span className="division-card-count">
-                        {count ? `${count} documents` : "No documents yet"}
+                        {count
+                          ? `${count} ${t("documents")}`
+                          : t("No documents yet")}
                       </span>
                     </Link>
                   );
                 })}
               </div>
               {!divisions.length && (
-                <p className="muted">No divisions match your search.</p>
+                <p className="muted">{t("No divisions match your search.")}</p>
               )}
             </section>
           )}
           <div className="library-footnote">
-            Organized by division. Built for everyday reference.
+            {t("Organized by division. Built for everyday reference.")}
           </div>
         </main>
       </div>

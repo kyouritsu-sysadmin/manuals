@@ -34,7 +34,11 @@ function inputFile(relative, folder) {
   );
   return target;
 }
+const japanese = JSON.parse(
+  fs.readFileSync(path.join(root, "src/data/locales/ja.json"), "utf8"),
+);
 const pages = [];
+const japanesePages = [];
 for (const doc of catalog.documents) {
   assert(
     catalog.divisions.some((d) => d.slug === doc.division),
@@ -72,22 +76,86 @@ for (const doc of catalog.documents) {
     !body.startsWith("---"),
     `Keep metadata in catalog.json, not source front matter: ${id}`,
   );
-  const attachment = doc.file
-    ? `\nimport DocumentFile from '@site/src/components/DocumentFile';\n\n<DocumentFile path={${JSON.stringify(doc.file)}} title={${JSON.stringify(doc.title)}} pdf={${doc.format === "PDF"}} />\n`
+  function makePage(document, content, ja = false) {
+    const attachment = document.file
+      ? `\nimport DocumentFile from '@site/src/components/DocumentFile';\n\n<DocumentFile path={${JSON.stringify(document.file)}} title={${JSON.stringify(document.title)}} pdf={${document.format === "PDF"}} />\n`
+      : "";
+    return {
+      id,
+      text: `---\ntitle: ${JSON.stringify(document.title)}\ndescription: ${JSON.stringify(document.description)}\nslug: /${id}\nhide_table_of_contents: ${Boolean(document.file)}\n---\n\n<div className="document-meta">${ja ? japanese.ui[document.format] || document.format : document.format} · ${document.language} · ${ja ? "更新日" : "Updated"} ${document.updated}${document.sample ? (ja ? " · サンプルガイド" : " · Sample guide") : ""}</div>\n\n${document.description}\n\n${content}\n${attachment}`,
+    };
+  }
+  pages.push(makePage(doc, body));
+  const translated = { ...doc, ...japanese.documents[id] };
+  if (translated.file) inputFile(translated.file, "static");
+  const translatedBody = translated.source
+    ? fs.readFileSync(inputFile(translated.source, ""), "utf8")
     : "";
-  pages.push({
-    id,
-    text: `---\ntitle: ${JSON.stringify(doc.title)}\ndescription: ${JSON.stringify(doc.description)}\nslug: /${id}\nhide_table_of_contents: ${Boolean(doc.file)}\n---\n\n<div className="document-meta">${doc.format} · ${doc.language} · Updated ${doc.updated}${doc.sample ? " · Sample guide" : ""}</div>\n\n${doc.description}\n\n${body}\n${attachment}`,
+  japanesePages.push(makePage(translated, translatedBody, true));
+}
+for (const [folder, documents] of [
+  [".generated-docs", pages],
+  ["i18n/ja/docusaurus-plugin-content-docs/current", japanesePages],
+]) {
+  const out = path.join(root, folder);
+  fs.rmSync(out, { recursive: true, force: true });
+  for (const { id, text } of documents) {
+    const file = path.join(out, id + ".mdx");
+    fs.mkdirSync(path.dirname(file), { recursive: true });
+    fs.writeFileSync(file, text);
+  }
+}
+// Serve a matching PDF.js worker, CMaps, and fonts from this site in both locales.
+const pdfjs = path.join(root, "node_modules/pdfjs-dist");
+const vendor = path.join(root, "static/vendor/pdfjs");
+fs.mkdirSync(vendor, { recursive: true });
+fs.copyFileSync(
+  path.join(pdfjs, "build/pdf.worker.min.mjs"),
+  path.join(vendor, "pdf.worker.min.mjs"),
+);
+fs.copyFileSync(path.join(pdfjs, "LICENSE"), path.join(vendor, "LICENSE"));
+for (const name of ["cmaps", "standard_fonts", "wasm", "iccs"]) {
+  fs.cpSync(path.join(pdfjs, name), path.join(vendor, name), {
+    recursive: true,
   });
 }
-const out = path.join(root, ".generated-docs");
-fs.rmSync(out, { recursive: true, force: true });
-fs.mkdirSync(out, { recursive: true });
-for (const { id, text } of pages) {
-  const file = path.join(out, id + ".mdx");
-  fs.mkdirSync(path.dirname(file), { recursive: true });
-  fs.writeFileSync(file, text);
-}
 console.log(
-  `Validated ${catalog.divisions.length} divisions and generated ${pages.length} documents.`,
+  `Validated ${catalog.divisions.length} divisions; generated ${pages.length} documents in English and Japanese, plus PDF.js assets.`,
+);
+
+// page-flip 2.0.7 leaves its animation loop running after destroy().
+// Patch a generated copy, retaining the pinned upstream package and license.
+const flipSource = fs.readFileSync(
+  path.join(root, "node_modules/page-flip/dist/js/page-flip.module.js"),
+  "utf8",
+);
+const loop =
+  "start(){this.update();const t=e=>{this.render(e),requestAnimationFrame(t)};requestAnimationFrame(t)}";
+const cleanup = "destroy(){this.ui.destroy(),this.block.remove()}";
+assert(
+  flipSource.includes(loop) && flipSource.includes(cleanup),
+  "Recheck the page-flip lifecycle patch after upgrading",
+);
+const patched = flipSource
+  .replace(
+    loop,
+    "start(){this.update();const t=e=>{if(this.disposed)return;this.render(e);this.frameId=requestAnimationFrame(t)};this.frameId=requestAnimationFrame(t)}stop(){this.disposed=true;cancelAnimationFrame(this.frameId)}",
+  )
+  .replace(
+    cleanup,
+    "destroy(){this.render.stop();this.ui.destroy();this.block.remove()}",
+  );
+const flipVendor = path.join(root, ".generated-vendor");
+fs.mkdirSync(flipVendor, { recursive: true });
+const flipLicense = fs.readFileSync(
+  path.join(root, "node_modules/page-flip/LICENSE"),
+  "utf8",
+);
+fs.writeFileSync(
+  path.join(flipVendor, "page-flip.js"),
+  `/*!\n${flipLicense}\n*/\n${patched}`,
+);
+fs.copyFileSync(
+  path.join(root, "node_modules/page-flip/LICENSE"),
+  path.join(flipVendor, "LICENSE"),
 );

@@ -1,18 +1,18 @@
 import type { SidebarsConfig } from "@docusaurus/plugin-content-docs";
 import catalog from "./src/data/library";
 const sidebars: SidebarsConfig = {};
-const baseUrl = process.env.BASE_URL || "/manuals/";
 for (const division of catalog.divisions) {
   const documents = catalog.documents.filter(
     (doc) => doc.division === division.slug,
   );
   if (!documents.length) continue;
   sidebars[division.slug] = [
-    { type: "link", label: "← All divisions", href: baseUrl },
+    { type: "link", label: "← All divisions", href: "/", autoAddBaseUrl: true },
     {
       type: "link",
       label: `${division.name} overview`,
-      href: `${baseUrl}${division.slug}/`,
+      href: `/${division.slug}/`,
+      autoAddBaseUrl: true,
     },
     ...catalog.categories
       .filter((category) =>

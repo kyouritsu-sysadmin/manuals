@@ -6,46 +6,109 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const catalog = JSON.parse(
   fs.readFileSync(path.join(root, "src/data/catalog.json"), "utf8"),
 );
+const japanese = JSON.parse(
+  fs.readFileSync(path.join(root, "src/data/locales/ja.json"), "utf8"),
+);
 const output = process.env.BUILD_DIR || path.join(root, "build");
 const base = process.env.BASE_URL || "/manuals/";
 let checks = 0;
-function page(route, text) {
-  const html = fs.readFileSync(path.join(output, route, "index.html"), "utf8");
-  const heading = html.match(/<h1\b[^>]*>([\s\S]*?)<\/h1>/)?.[1];
-  const escaped = text
+const escaped = (text) =>
+  text
     .replaceAll("&", "&amp;")
     .replaceAll("<", "&lt;")
     .replaceAll(">", "&gt;")
     .replaceAll('"', "&quot;")
     .replaceAll("'", "&#x27;");
-  assert.equal(heading, escaped, `Incorrect heading: ${route}`);
-  assert(html.includes(`${base}assets/`), `Incorrect asset base URL: ${route}`);
-  checks++;
-  return html;
-}
-page("", "A place for every document.");
-for (const division of catalog.divisions) {
-  page(division.slug, division.name);
-  for (const category of catalog.categories)
-    page(`${division.slug}/${category.slug}`, category.name);
-}
-for (const doc of catalog.documents) {
-  const html = page(`${doc.division}/${doc.category}/${doc.slug}`, doc.title);
-  if (doc.file) {
-    assert(
-      html.includes(`${base}${doc.file}`),
-      `Incorrect attachment URL: ${doc.slug}`,
+for (const locale of ["en", "ja"]) {
+  const prefix = locale === "ja" ? "ja/" : "";
+  const localeBase = base + prefix;
+  const directory = path.join(output, prefix);
+  function page(route, text) {
+    const html = fs.readFileSync(
+      path.join(directory, route, "index.html"),
+      "utf8",
     );
-    assert.deepEqual(
-      fs.readFileSync(path.join(output, doc.file)),
-      fs.readFileSync(path.join(root, "static", doc.file)),
-      `Attachment changed: ${doc.file}`,
+    const heading = html.match(/<h1\b[^>]*>([\s\S]*?)<\/h1>/)?.[1];
+    assert.equal(
+      heading,
+      escaped(text),
+      `Incorrect heading: ${locale}/${route}`,
+    );
+    assert(
+      html.includes(`lang="${locale}"`),
+      `Incorrect HTML language: ${locale}/${route}`,
+    );
+    assert(
+      html.includes(`${localeBase}assets/`),
+      `Incorrect asset prefix: ${locale}/${route}`,
+    );
+    checks++;
+    return html;
+  }
+  const home = page(
+    "",
+    locale === "ja"
+      ? japanese.ui["A place for every document."]
+      : "A place for every document.",
+  );
+  assert(
+    home.includes(`href="${base}ja/"`),
+    "Missing Japanese language switch",
+  );
+  for (const division of catalog.divisions) {
+    const name =
+      locale === "ja"
+        ? japanese.divisions[division.slug]?.name || division.name
+        : division.name;
+    page(division.slug, name);
+    for (const category of catalog.categories)
+      page(
+        `${division.slug}/${category.slug}`,
+        locale === "ja"
+          ? japanese.categories[category.slug]?.name || category.name
+          : category.name,
+      );
+  }
+  for (const doc of catalog.documents) {
+    const id = `${doc.division}/${doc.category}/${doc.slug}`;
+    const localized =
+      locale === "ja" ? { ...doc, ...japanese.documents[id] } : doc;
+    const html = page(id, localized.title);
+    assert(
+      html.includes(`href="${localeBase}${doc.division}/"`),
+      `Sidebar leaves locale: ${id}`,
+    );
+    if (localized.file) {
+      assert(
+        html.includes(`${localeBase}${localized.file}`),
+        `Incorrect attachment URL: ${locale}/${id}`,
+      );
+      assert.deepEqual(
+        fs.readFileSync(path.join(directory, localized.file)),
+        fs.readFileSync(path.join(root, "static", localized.file)),
+        `Attachment changed: ${localized.file}`,
+      );
+      if (localized.format === "PDF")
+        assert(
+          html.includes(locale === "ja" ? "ブック表示" : "Flipbook"),
+          `Missing flipbook controls: ${locale}/${id}`,
+        );
+      checks++;
+    }
+  }
+  for (const file of [
+    "404.html",
+    ".nojekyll",
+    "vendor/pdfjs/pdf.worker.min.mjs",
+    "vendor/pdfjs/cmaps/UniJIS-UTF16-H.bcmap",
+  ]) {
+    assert(
+      fs.existsSync(path.join(directory, file)),
+      `Missing runtime file: ${locale}/${file}`,
     );
     checks++;
   }
 }
-assert(fs.existsSync(path.join(output, "404.html")), "Missing 404 page");
-assert(fs.existsSync(path.join(output, ".nojekyll")), "Missing .nojekyll");
 console.log(
-  `Passed ${checks + 2} production checks: division/category/document routes, asset prefixes, attachment integrity, and GitHub Pages files.`,
+  `Passed ${checks} production checks across English and Japanese: routes, localized navigation, PDF controls, attachments, workers, and Japanese CMaps.`,
 );

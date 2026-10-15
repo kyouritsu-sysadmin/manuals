@@ -17,5 +17,5 @@
     "skipLibCheck": true,
     "strict": true
   },
-  "exclude": [".docusaurus", "build", "legacy"]
+  "exclude": [".docusaurus", "build", "legacy", ".generated-vendor"]
 }

@@ -2,6 +2,18 @@ const catalog = require("../src/data/catalog.json");
 module.exports = function libraryPlugin(context) {
   return {
     name: "division-library",
+    configureWebpack() {
+      return {
+        resolve: {
+          alias: {
+            "page-flip$": require("node:path").join(
+              context.siteDir,
+              ".generated-vendor/page-flip.js",
+            ),
+          },
+        },
+      };
+    },
     async contentLoaded({ actions }) {
       for (const division of catalog.divisions) {
         for (const category of [null, ...catalog.categories]) {
